@@ -5,7 +5,7 @@
 	$connection = mysqli_connect($dbhost,$dbuser,$dbpass,'aml_db');
 
 	if(! $connection){
-		die('Could not Connect to Database' . mysql_error());
+		die('Could not Connect to Database3333' . mysql_error());
 	}
 
 	 $query = "SELECT waiter_name, date, SUM(item_comm) as sum FROM waiter_commission group by waiter_name"; 
@@ -14,7 +14,7 @@
 	$result = mysqli_query( $connection , $query );
 
 	if(! $result){
-		die('Could not get data from database : ' . mysql_error() );
+		die('Could not get data from database444444 : ' . mysql_error() );
 	}
 	 
 	 echo "

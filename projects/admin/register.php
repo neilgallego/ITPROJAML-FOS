@@ -84,12 +84,6 @@ font-size: 16px;"> <b><?php date_default_timezone_set("Asia/Manila");
         
                         <?php
 
-
-
-
-
-
-
                             require('connect.php');
                             // If the values are posted, insert them into the database.
                             if (isset($_POST['username']) && isset($_POST['password'])){
@@ -98,14 +92,13 @@ font-size: 16px;"> <b><?php date_default_timezone_set("Asia/Manila");
                                 $email = $_POST['email'];
                                 
                                 $password = $_POST['password'];
+                                $hashedpassword = md5($password);
                                 $position = $_POST['position'];
                                 $lastname = $_POST['lastname'];
                                 $firstname = $_POST['firstname'];
-                                
-                                
 
                                 $query = "INSERT INTO `users` (username, firstname, lastname, password,position, email) 
-                                VALUES ('$username', '$firstname', '$lastname','$password', '$position', '$email')";
+                                VALUES ('$username', '$firstname', '$lastname','$hashedpassword', '$position', '$email')";
                                 $result = mysqli_query($connection, $query) or die(mysql_error());;
                                 if($result){
                                 echo ("<SCRIPT LANGUAGE='JavaScript'>
@@ -128,7 +121,7 @@ font-size: 16px;"> <b><?php date_default_timezone_set("Asia/Manila");
                                     <div class="form-group col-md-6">
                              <label for="inputUser" class="sr-only"></label>Username
                               
-                              <input type="text" name="username" pattern="^[+]?\d+([.]\d+)?$" class="form-control" placeholder="Contact No." minlength="11" id="inputUser"required >
+                              <input type="text" name="username" class="form-control" placeholder="Contact No." id="inputUser"required >
                           </div>
                                     <div class="form-group col-md-6">
                               <label for="inputLasttName" class="sr-only"></label>Last Name
@@ -152,12 +145,14 @@ font-size: 16px;"> <b><?php date_default_timezone_set("Asia/Manila");
                                  
                                   <option value="Checker">Checker</option>
                                   <option value="Cashier">Cashier</option>
+                                  <!-- <option value="Cashier">Admin</option> -->
                                 </select> 
                                  </div>
 
                                   <div class="form-group col-md-9">
                                 <label for="inputPassword" class="sr-only"></label>Password
                                 <input type="password" name="password" id="pass2"  class="form-control" placeholder="Password" required minlength="8">
+
                                 </div>
                                 <!-- //<input type="text" onKeyPress="return ( this.value.length < 10 );"/> -->
 

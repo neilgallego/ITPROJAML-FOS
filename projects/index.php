@@ -7,7 +7,9 @@ $error='';
 if (isset($_POST['submit'])) {
 
 $username = $_POST['username'];
+
 $password = $_POST['password'];
+$password = md5($password);
 
 $connection = mysqli_connect("localhost", "root", "");
 
@@ -15,6 +17,7 @@ $username = stripslashes($username);
 $password = stripslashes($password);
 $varusername = mysqli_real_escape_string($connection,$username);
 $varpassword = mysqli_real_escape_string($connection,$password);
+
 
 $result = mysqli_select_db($connection,"aml_db");
 
@@ -34,13 +37,13 @@ if(! $result){
             $firstname = $row['firstname'];
             $password = $row['password'];
             $position = $row['position'];
-      
+          
            if($varpassword == $password){
      
                   if($position == 'Checker'){
-
+                  
                     $_SESSION['fname'] = $firstname;
-                     header("Location: checker/main.php");
+                   header("Location: checker/main.php");
                   }elseif($position == 'Cashier'){
                     $_SESSION['username'] = $firstname;
                       //echo "cashier";
@@ -98,7 +101,7 @@ if(! $result){
 				  </p>
 
 				  <p class="field">
-					<input type="password" name="password" placeholder="Password"  maxlength="11" required/>
+					<input type="password" name="password" placeholder="Password"   required/>
 					<i class="fa fa-lock"></i>
 				  </p>
 

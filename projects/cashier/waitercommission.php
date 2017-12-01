@@ -159,7 +159,7 @@
 												$connection = mysqli_connect($dbhost,$dbuser,$dbpass,'aml_db');
 
 												if(! $connection){
-													die('Could not Connect to Database' . mysql_error());
+													die('Could not Connect to Database11111' . mysql_error());
 												}
 
 												$query = "SELECT waiter_name FROM waiter_commission group by waiter_name";
@@ -167,7 +167,7 @@
 												$result = mysqli_query( $connection , $query );
 
 												if(! $result){
-													die('Could not get data from database : ' . mysql_error() );
+													die('Could not get data from database22222: ' . mysql_error() );
 												}
 
 												$array  = array();
