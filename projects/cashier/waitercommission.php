@@ -83,11 +83,6 @@
 					</button>
 					<a class="navbar-brand"><small><span class="glyphicon glyphicon-shopping-cart" style="size:10%"></span></small>CASHIER</a> 
 				</div>
-				
-				<div style="color: white; padding: 10px 50px 5px 5px; float: left; ">
-					<button type="button" class="btn btn-danger btn-lg glyphicon glyphicon-refresh" onclick="window.location.reload(true);"></button>
-				</div>
-				
 				<div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;">
 					<?php date_default_timezone_set("Asia/Manila"); 
 						  echo $today = date("F j, Y g:i A");?> 
@@ -164,7 +159,7 @@
 												$connection = mysqli_connect($dbhost,$dbuser,$dbpass,'aml_db');
 
 												if(! $connection){
-													die('Could not Connect to Database' . mysql_error());
+													die('Could not Connect to Database11111' . mysql_error());
 												}
 
 												$query = "SELECT waiter_name FROM waiter_commission group by waiter_name";
@@ -172,7 +167,7 @@
 												$result = mysqli_query( $connection , $query );
 
 												if(! $result){
-													die('Could not get data from database : ' . mysql_error() );
+													die('Could not get data from database22222: ' . mysql_error() );
 												}
 
 												$array  = array();
