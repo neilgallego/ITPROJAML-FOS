@@ -1,6 +1,6 @@
 <?php
 	include('dbcon.php');
-	include 'a.php';
+	include 'd.php';
 
 
 	if (isset($_POST['delete'])){
@@ -22,7 +22,7 @@
 			echo
 			("<SCRIPT LANGUAGE='JavaScript'>
 			 window.alert('Transaction Complete!');
-			window.location.href='a.php';
+			window.location.href='d.php';
 			</SCRIPT>");
 		
 		

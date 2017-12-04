@@ -5,7 +5,7 @@
 	$connection = mysqli_connect($dbhost,$dbuser,$dbpass,'aml_db');
 
 	if(! $connection){
-		die('Could not Connect to Database3333' . mysql_error());
+		die('Could not Connect to Database' . mysql_error());
 	}
 
 	 $query = "SELECT waiter_name, date, SUM(item_comm) as sum FROM waiter_commission group by waiter_name"; 
@@ -14,7 +14,7 @@
 	$result = mysqli_query( $connection , $query );
 
 	if(! $result){
-		die('Could not get data from database444444 : ' . mysql_error() );
+		die('Could not get data from database : ' . mysql_error() );
 	}
 	 
 	 echo "
@@ -36,7 +36,7 @@
 		 $varname = $row[0];
 
 		       echo '<tr>';
-					echo'	<td><input id="'. $varname .'" type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#myModal'.$varname.'"  style="margin-right:1%;margin-top:1%;"  onclick="showDiv()" value="'.$varname.'"></td>';
+					echo'	<td><input id="'. $varname .'" type="button" class="btn btn-md btn-default " data-toggle="modal" data-target="#myModal'.$varname.'"  style="margin-right:1%;margin-top:1%;"  onclick="showDiv()" value="'.$varname.'"></td>';
 					echo '<td style=text-align:right;>'  . $row['sum'] . '</td>';
 				echo '</tr>';
 		

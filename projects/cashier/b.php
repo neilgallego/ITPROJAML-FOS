@@ -83,6 +83,11 @@
 					</button>
 					<a class="navbar-brand"><small><span class="glyphicon glyphicon-shopping-cart" style="size:10%"></span></small>CASHIER</a> 
 				</div>
+				
+				<div style="color: white; padding: 10px 50px 5px 5px; float: left; ">
+					<button type="button" class="btn btn-danger btn-lg glyphicon glyphicon-refresh" onclick="window.location.reload(true);"></button>
+				</div>
+				
 				<div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;">
 					<?php date_default_timezone_set("Asia/Manila"); 
 						  echo $today = date("F j, Y g:i A");?> 
@@ -172,13 +177,13 @@
 														$array[] = $row[$i]; 
 														$table_no = $array[$i];
 
-													echo'<div class="modal fade" id="myModal'.$table_no.'" role="dialog">';
+													echo'<div class="modal fade" id="myModal'.$table_no.'" role="dialog" data-backdrop="static" data-keyboard="true" tabindex="-1">';
 echo <<<FRAG
 															<div class="modal-dialog modal-lg">
 																<div class="modal-content">
 																	<div class="panel-heading" style="background-color:#E0E0E0;">
 FRAG;
-																		echo '<h3 class="modal-title" style="text-align:center;">'.$table_no.' </h3>';
+																		echo ' 	<button type="button" class="btn btn-danger btn-sm " data-dismiss="modal" style="float: right;"><span class="glyphicon glyphicon-remove"></button><h3 class="modal-title" style="text-align:center;">'.$table_no.' </h3>';
 echo <<<FRAG
 																	</div>
 																	
@@ -228,7 +233,7 @@ FRAG;
 																	
 
 												
-																				echo'<input id="dis" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#oth'.$table_no.'" onclick="adminprompt();showDiv();" style="margin-left: 1%; margin-top: 1%; margin-bottom: 1%; float: left;" value="ON THE HOUSE" >';
+																				echo'<input id="dis" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#oth'.$table_no.'" onclick="showDiv();" style="margin-left: 1%; margin-top: 1%; margin-bottom: 1%; float: left;" value="ON THE HOUSE" >';
 																				
 																				include 'db.php';	
 																				$query = "SELECT username , password, position, status FROM users where position='Admin' AND status='Active'";
@@ -239,7 +244,7 @@ FRAG;
 																				}else
 																					die('Could not get data from database : ' . mysql_error());						
 																				
-																		    echo'<div class="modal fade" id="oth'.$table_no.'" role="dialog">';
+																		    echo'<div class="modal fade" id="oth'.$table_no.'" role="dialog" role="dialog" ddata-keyboard="true" tabindex="-1">';
 echo <<<FRAG
 																					<div class="modal-dialog modal-md">
 																						<div class="modal-content">
@@ -254,7 +259,7 @@ FRAG;
 																									$query = "SELECT * FROM served_db where served_table = '$table_no'"; 
 																									$result = mysqli_query($conn, $query);
 echo <<<FRAG
-																									<form method="post" action="delete.php" >
+																									<form method="post" action="deleteB.php" >
 																				
 																										<div style="width:100%; height:300px; overflow-y:scroll;"> 
 																											<table class="table table-condensed" cellspacing="0" width="98%" align="center">
@@ -298,7 +303,7 @@ echo <<<FRAG
 																										</script>					
 																										<div class="modal-footer">
 FRAG;
-																											echo '<input type="submit" class="btn btn-danger" value="Apply" name="delete" onClick="return show_alert()">';
+																											echo '<button type="button" class="btn" data-dismiss="modal">Close</button><input type="submit" class="btn btn-danger" value="Apply" name="delete" onClick="return adminprompt()">';
  echo <<<FRAG
 																									</form>	
 																								</div>
@@ -307,10 +312,21 @@ FRAG;
 																					</div>
 																				</div>
 																			</div>
+																			<script>
+																					function adminprompt(){
+																						var pass = prompt('Please enter password for authorization', '');
+																						if (pass != null && pass == $pass) {
+																							window.location.href='deleteB.php';
+																						}else{
+																							alert('Authorization denied!');
+																							return false;
+																						}
+																					}
+																				</script>
 FRAG;
-																	   echo'<form id="form'.$table_no.'" action="b.php" method="post" onsubmit="return confirm(Do you really want to submit?)">';
+																	   echo'<form name="billform" id="form'.$table_no.'" action="b.php" method="post" onsubmit="return check_alert()">';
 																	   		echo'<input id="dis" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#mydis'.$table_no.'" onclick="showDiv();" style="margin-left: 1%; margin-top: 1%; margin-bottom: 1%; float: left;" value="DISCOUNTS">';
-																			echo'<div class="modal fade" id="mydis'.$table_no.'" role="dialog">';
+																			echo'<div class="modal fade" id="mydis'.$table_no.'" role="dialog" ddata-keyboard="true" tabindex="-1">';
 echo <<<FRAG
 																					<div class="modal-dialog modal-md">
 																						<div class="modal-content">
@@ -333,7 +349,7 @@ echo <<<FRAG
 																										</tbody>
 																									</table> 
 																									<div class="modal-footer">
-																										<button class="btn btn-primary " data-dismiss="modal">Apply Discount</button>
+																										<button type="button" class="btn" data-dismiss="modal">Close</button><button  type="button" class="btn btn-primary " data-dismiss="modal">Apply Discount</button>
 																									</div>		
 																								</div>
 																							</div>
@@ -342,12 +358,12 @@ echo <<<FRAG
 																				</div>
 FRAG;
 																	   echo'<input  id="bill'.$table_no.'" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mybill'.$table_no.'" onclick="showDiv();" style="margin-left: 1%; margin-top: 1%; margin-bottom: 1%; text-align:center;" value="BILLOUT">';
-																	   echo'<div class="modal fade" id="mybill'.$table_no.'"" role="dialog">';
+																	   echo'<div class="modal fade" id="mybill'.$table_no.'"" role="dialog" role="dialog" ddata-keyboard="true" tabindex="-1">';
 echo <<<FRAG
 																				<div class="modal-dialog modal-md">
 																					<div class="modal-content">
 																						<div class="panel-heading btn-primary">
-																							<h5 class="modal-title" style="text-align:center;">BILLOUT</h5>
+																						<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" style="float: right;"><span class="glyphicon glyphicon-remove"></button><h5 class="modal-title" style="text-align:center;">BILLOUT</h5>
 																						</div>
 																						<div class="panel-body">
 																							<div class="table-responsive">
@@ -366,14 +382,16 @@ echo <<<FRAG
 																												<label for="choice-mod-card">Card</label>
 																												<div class="reveal-if-active">
 																													<label for="which-card">Enter Transaction Number: </label>
-																													<input type="text" id="transac_no" name="transac_no" class="require-if-active" data-require-pair="#choice-mod-card">
+																													<input type="text" id="transac_no" name="transac_no" class="require-if-active" data-require-pair="#choice-mod-card" minlength="5">
 																												</div>
 																											</div>
 																										</td>
 																									</tr>
 																									<tr style=font-family:Open Sans;>
-																										<td style="text-align:right;font-weight:bold;width:3%;">CASH RECEIVED:</td>
-																										<td style="width: 20%;margin-left:5%;"><input name="cash_rcvd" id="cash_rcvd" type="number" value="cash" style="width: 95%"></td>
+																									<td style="text-align:right;font-weight:bold;width:3%;">CASH RECEIVED:</td>
+FRAG;
+																								echo'<td style="width: 20%;margin-left:5%;"><input name="cash_rcvd" id="cash_rcvd" type="number" value="'.$sum.'" min="'.$sum.'" style="width: 95%" ></td>';
+ echo <<<FRAG
 																									</tr>
 																									<tr style=font-family:Open Sans;></tr>
 																									<tr style=text-align:center;font-family:Open Sans;>
@@ -382,7 +400,7 @@ echo <<<FRAG
 																												<button type="reset" class="btn btn-primary">CLEAR</button>
 FRAG;
 
-																										echo '<button type="submit" class="btn btn-primary" name="submit'.$table_no.'" onClick="return show_alert()">BILLOUT</button>';	
+																										echo '<button type="submit" class="btn btn-primary" name="submit'.$table_no.'">BILLOUT</button>';	
  echo <<<FRAG
 																											</div>
 																										</td>
@@ -400,11 +418,13 @@ FRAG;
 																													
 																											$query = "INSERT INTO `billing` (bill_time, bill_date, table_no, no_sc, no_pax, total_discounts, cash_rcvd, transac_no, total_bill) VALUES (now() , curdate(), '$table_no', '$no_sc', '$no_pax', '$total_discounts','$cash_rcvd', '$transac_no', '$sum');";																											
 																											$query .= "update `billing` set `change` = `cash_rcvd` - `total_bill` where no_sc = 0;";																											
-																											$query .= "update `billing` set `total_bill` = (`total_bill` - (((`total_bill`/`no_pax`)*.20)*`no_sc`)) where no_sc != 0;";																											
-																											$query .= "update `billing` set `change` = `cash_rcvd` - `total_bill` where no_sc != 0;";																													
+																											$query .= "update `billing` set `total_discounts` = (((`total_bill`/`no_pax`)*.20)*`no_sc`) where no_sc != 0;";		
+																											$query .= "update `billing` set `new_bill` = `total_bill` - `total_discounts` where no_sc != 0;";																								
+																											$query .= "update `billing` set `change` = `cash_rcvd` - `new_bill` where no_sc != 0;";																													
 																											$query .= "insert into paid_db (paid_id,paid_code, paid_table,paid_waiter,paid_time,paid_date,paid_quantity,paid_name,paid_price,paid_type,paid_tprice)
 																													select served_id,served_code,served_table,served_waiter,now(),served_date,served_quantity,served_name,served_price,served_type,served_tprice
 																													from served_db where served_table= '$table_no';";
+																											
 																											$query .= "Delete from served_db where served_table= '$table_no'";																						
 																											$result = mysqli_multi_query($conn, $query) or die (mysql_error());																												
 																											if($result){	
@@ -449,21 +469,22 @@ FRAG;
 				function show_alert() {
 					var AlertBox = "";
 					AlertBox=confirm("Are you sure you want to proceed?");
-					return AlertBox;
+					return AlertBox; 
 				}
 			</script>
 			
-											
 			<script>
-				function adminprompt(){
-					var pass = prompt('Please enter Admin password for authorization', '');
-					if (pass != null && pass == $pass) {
-						window.location.href='insertHistory.php';
-					}else{
-						alert('Authorization denied!');
-						window.location.href='b.php';
+				function check_alert() {
+					var empt = document.forms["billform"]["cash_rcvd"].value;  
+					if (empt == ""){  
+						var AlertBox = "";
+						AlertBox=confirm("You didn't put any amount in 'Cash Received.' Are you sure you want to proceed?");
+						return AlertBox; 
 					}
 				}
+			</script>
+			
+
 			</script>
 
             <!-- JQUERY SCRIPTS -->
