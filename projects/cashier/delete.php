@@ -1,6 +1,6 @@
 <?php
 	include('dbcon.php');
-	include 'a.php';
+
 
 
 	if (isset($_POST['delete'])){
@@ -21,9 +21,10 @@
 		$result = mysqli_query($conn, $query) or die (mysql_error());
 			echo
 			("<SCRIPT LANGUAGE='JavaScript'>
-			 window.alert('Transaction Complete!');
-			window.location.href='a.php';
+			 window.alert('Transaction Complete!')
+			
 			</SCRIPT>");
+		header('Location:a.php');
 		
 		
 	}
