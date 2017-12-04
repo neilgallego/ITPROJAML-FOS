@@ -36,7 +36,7 @@
 		 $varname = $row[0];
 
 		       echo '<tr>';
-					echo'	<td><input id="'. $varname .'" type="button" class="btn btn-lg btn-default" data-toggle="modal" data-target="#myModal'.$varname.'"  style="margin-right:1%;margin-top:1%;"  onclick="showDiv()" value="'.$varname.'"></td>';
+					echo'	<td><input id="'. $varname .'" type="button" class="btn btn-md btn-default" data-toggle="modal" data-target="#myModal'.$varname.'"  style="margin-right:1%;margin-top:1%;"  onclick="showDiv()" value="'.$varname.'"></td>';
 					echo '<td style=text-align:right;>'  . number_format($row['sum'],2) . '</td>';
 				echo '</tr>';
 	}
