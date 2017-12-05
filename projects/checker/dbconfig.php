@@ -1,12 +1,10 @@
 <?php
+		$dbhost = 'localhost';
+		$dbuser = 'root';
+		$dbpass = '';
+		$connection = mysqli_connect($dbhost,$dbuser,$dbpass,'aml_db');
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "aml_db";
-
-$con = mysqli_connect($servername, $username, $password, $dbname);
-
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-}
+		if(! $connection){
+			die('Could not Connect to Database' . mysql_error());
+		}
+?>

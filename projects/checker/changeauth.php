@@ -153,35 +153,11 @@ if(isset($_POST['change'] )) {
 			DESCRIPTION : <input class= 'tb' type='text' name='newdesc' required>
 			<br>
 			&nbsp&nbsp&nbsp&nbsp QUANTITY : <input class= 'tb' type='number' name='varnewquantity' value='1' required>
-			<br>
+			<br>";
 
-			<!-- dbase names -->
-	        <input type='hidden' name ='vardb' value='served_db'>
-	        <input type='hidden' name ='vardbid' value='served_id'>
-	        <input type='hidden' name ='vardbquantity' value='served_quantity'>
-	        <input type='hidden' name ='vardbname' value='served_name'>
-	        <input type='hidden' name ='vardbtable' value='served_table'>
-	        <input type='hidden' name ='vardbcode' value='served_code'>
-	        <input type='hidden' name ='vardbprice' value='served_price'>
-	        <input type='hidden' name ='vardbwaiter' value='served_waiter'>
-	        <input type='hidden' name ='vardbdate' value='served_date'>
-	        <input type='hidden' name ='vardbtime' value='served_time'>
-	        <input type='hidden' name ='vardbtype' value='served_type'> 
-	        <input type='hidden' name ='vardbtotalprice' value='served_tprice'>
-			<input type='hidden' name ='vardbpriority' value='served_priority'>	 
-	        <!-- dbase names -->
-			
-			<input type='hidden' name='id' value='$varid'>
-			<input type='hidden' name ='varoldquantity' value='$varoldquantity'>
+			include ('variables.php');
 
-			<input type='hidden' name ='varchange' value='$varchange'>
-
-            <input type='hidden' name ='ordername' value='$varname'>
-            <input type='hidden' name ='orderprice' value='$varprice'>
-            <input type='hidden' name ='ordercode' value='$varcode'>
-            <input type='hidden' name ='orderwaiter' value='$varwaiter'>
-            <input type='hidden' name ='ordertable' value='$vartable'>
-        	<input type='hidden' name ='ordertype' value='$vartype'>
+			echo"
 
 			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp PRICE : <input class= 'tb' type='number' name='newprice' required>
 			<br>
@@ -200,33 +176,11 @@ if(isset($_POST['change'] )) {
 			DESCRIPTION : <input class= 'tb' type='text' name='newdesc' required>
 			<br>
 			&nbsp&nbsp&nbsp&nbsp QUANTITY : <input class= 'tb' type='number' name='varnewquantity' value='1' required>
-			<br>
+			<br>";
 
-			<!-- dbase names -->
-	        <input type='hidden' name ='vardb' value='served_db'>
-	        <input type='hidden' name ='vardbid' value='served_id'>
-	        <input type='hidden' name ='vardbquantity' value='served_quantity'>
-	        <input type='hidden' name ='vardbname' value='served_name'>
-	        <input type='hidden' name ='vardbtable' value='served_table'>
-	        <input type='hidden' name ='vardbcode' value='served_code'>
-	        <input type='hidden' name ='vardbprice' value='served_price'>
-	        <input type='hidden' name ='vardbwaiter' value='served_waiter'>
-	        <input type='hidden' name ='vardbdate' value='served_date'>
-	        <input type='hidden' name ='vardbtime' value='served_time'>
-	        <input type='hidden' name ='vardbtype' value='served_type'> 
-	        <input type='hidden' name ='vardbtotalprice' value='served_tprice'>
-			<input type='hidden' name ='vardbpriority' value='served_priority'>	 
-	        <!-- dbase names -->
+			include ('variables.php');
 
-	        <input type='hidden' name ='varoldquantity' value='$varoldquantity'>
-	        <input type='hidden' name ='ordername' value='$varname'>
-            <input type='hidden' name ='orderprice' value='$varprice'>
-            <input type='hidden' name ='ordercode' value='$varcode'>
-            <input type='hidden' name ='orderwaiter' value='$varwaiter'>
-            <input type='hidden' name ='ordertable' value='$vartable'>
-        	<input type='hidden' name ='ordertype' value='$vartype'>
-	        <input type='hidden' name ='varchange' value='$varchange'>
-
+			echo "
 			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp PRICE : <input class= 'tb' type='number' name='newprice' required>
 			<br>
 			<input type='hidden' name ='orderid' value='$varid'>
@@ -250,34 +204,11 @@ if(isset($_POST['change'] )) {
 			HOW MANY WOULD YOU LIKE TO CHANGE?
 			<br>
 
-			<input class= textbox type='number' style=' width: 80px;' class='form-control input-xs' name='neworderquantity' min='1' max='$varoldquantity'  value=$varoldquantity >
+			<input class= textbox type='number' style=' width: 80px;' class='form-control input-xs' name='neworderquantity' min='1' max='$varoldquantity'  value=$varoldquantity >";
 
-			<input type='hidden' name ='id' value='$varid'>
-			<input type='hidden' name ='oldorderquantity' value='$varoldquantity'> 
-			<input type='hidden' name ='ordername' value='$varname'>
-			<input type='hidden' name ='orderprice' value='$varprice'>
-			<input type='hidden' name ='ordercode' value='$varcode'>
-			<input type='hidden' name ='orderwaiter' value='$varwaiter'>
-			<input type='hidden' name ='ordertable' value='$vartable'>
-			<input type='hidden' name ='ordertype' value='$vartype'>
+			include ('variables.php');
 
-			<!-- dbase names -->
-		    <input type='hidden' name ='vardb' value='$vardb'>
-		    <input type='hidden' name ='vardbid' value='$vardbid'>
-		    <input type='hidden' name ='vardbquantity' value='$vardbquantity'>
-		    <input type='hidden' name ='vardbname' value='$vardbname'>
-		    <input type='hidden' name ='vardbtable' value='$vardbtable'>
-		    <input type='hidden' name ='vardbcode' value='$vardbcode'>
-		    <input type='hidden' name ='vardbprice' value='$vardbprice'>
-			<input type='hidden' name ='vardbwaiter' value='$vardbwaiter'>
-		    <input type='hidden' name ='vardbdate' value='$vardbdate'>
-		    <input type='hidden' name ='vardbtime' value='$vardbtime'>
-		    <input type='hidden' name ='vardbtype' value='$vardbtype'>
-		    <input type='hidden' name ='vardbtotalprice' value='$vardbtotalprice'>
-		    <input type='hidden' name ='vardbpriority' value='$vardbpriority'>	
-		    <input type='hidden' name ='varchange' value='$varchange'>
-		    <!-- dbase names -->
-						
+			echo "
 			<input class = button type='submit' class='btn btn-default btn-md' name ='change' value='CHANGE'>
 			<input class = button3 type='submit' class='btn btn-default btn-md' name = 'no' value='NO' >
 			<input class ='button2' type='checkbox' name='ordertype' value='Take Out' placeholder='TAKE OUT'/>TAKE OUT
@@ -291,59 +222,35 @@ if(isset($_POST['change'] )) {
 
 			echo "
 			<CENTER><table >
-			<form method='POST' action='changetables/a.php' target ='iframe_c'> 
-							   		
-			<input type='hidden' name ='id' value='$varid'>
+			<form method='POST' action='changetables/a.php' target ='iframe_c'>";
 
-			<!-- dbase names -->
-			<input type='hidden' name ='vardb' value='$vardb'>
-			<input type='hidden' name ='vardbid' value='$vardbid'>
-			<input type='hidden' name ='vardbtable' value='$vardbtable'>				   
-			<!-- dbase names -->
-			<input type='hidden' name ='varchange' value='$varchange'>
+			include ('variables.php');
 
+			echo " 
 			<input  id = 'button'  type='submit' class='btn btn-warning btn-sm' name = 'change' value='A TABLES'>
 			</form>
 
-			<form method='POST' action='changetables/b.php' target ='iframe_c'> 
-							   		
-			<input type='hidden' name ='id' value='$varid'>
+			<form method='POST' action='changetables/b.php' target ='iframe_c'>";
 
-			<!-- dbase names -->
-			<input type='hidden' name ='vardb' value='$vardb'>
-			<input type='hidden' name ='vardbid' value='$vardbid'>
-			<input type='hidden' name ='vardbtable' value='$vardbtable'>
-			<!-- dbase names -->
-			<input type='hidden' name ='varchange' value='$varchange'>
-
+			include ('variables.php');				   		
+			
+			echo "
 			<input id = 'button'  type='submit' class='btn btn-warning btn-sm' name = 'change' value='B TABLES'>
 			</form>
 
-			<form method='POST' action='changetables/c.php' target ='iframe_c'> 
-							   		
-			<input type='hidden' name ='id' value='$varid'>
+			<form method='POST' action='changetables/c.php' target ='iframe_c'>";
 
-			<!-- dbase names -->
-			<input type='hidden' name ='vardb' value='$vardb'>
-			<input type='hidden' name ='vardbid' value='$vardbid'>
-			<input type='hidden' name ='vardbtable' value='$vardbtable'>
-			<!-- dbase names -->
-			<input type='hidden' name ='varchange' value='$varchange'>
-
+			include ('variables.php');				   		
+			
+			echo "
 			<input id = 'button'  type='submit' class='btn btn-warning btn-sm' name = 'change' value='C TABLES'>
 			</form>
 						
-			<form method='POST' action='changetables/d.php' target ='iframe_c'> 
-							   		
-			<input type='hidden' name ='id' value='$varid'>
+			<form method='POST' action='changetables/d.php' target ='iframe_c'>";
 
-			<!-- dbase names -->
-			<input type='hidden' name ='vardb' value='$vardb'>
-			<input type='hidden' name ='vardbid' value='$vardbid'>
-			<input type='hidden' name ='vardbtable' value='$vardbtable'>
-			<!-- dbase names -->
-			<input type='hidden' name ='varchange' value='$varchange'>
-
+			include ('variables.php');				   		
+			
+			echo " 
 			<input id = 'button'  type='submit' class='btn btn-warning btn-sm' name = 'change' value='D TABLES'>
 			</form>
 			</table></CENTER>

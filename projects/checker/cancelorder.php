@@ -84,9 +84,7 @@ mysqli_close($connection);
 
 
 }else {
-
-	//echo "ORDER NOT CANCELLED";
-	header("Location: /item category/appetizzer.php");
+	header("Location: item category/appetizzer.php");
 }
 
 ?>
