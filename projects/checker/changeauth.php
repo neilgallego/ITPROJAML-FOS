@@ -124,6 +124,7 @@ if(isset($_POST['change'] )) {
 	$varchange = $_POST['varchange'];
 	//$varquantity = $_POST['varquantity'];
 	$varoldquantity = $_POST['oldorderquantity']; 
+	$vartprice = $_POST['vartprice'];
 
 	//dbnames
 	$vardb = $_POST['vardb'];

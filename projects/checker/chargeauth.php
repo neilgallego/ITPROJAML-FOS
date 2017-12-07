@@ -72,8 +72,8 @@ if(isset($_POST['charge'] )) {
 	<input type='hidden' name ='vartprice' value='$vartprice'>
 	<input type='hidden' name ='varoldquantity' value='$varoldquantity'>
 	<input type='hidden' name ='orderid' value='$varid'>
-	<input type='button' name ='orderid' value='$varid'>
-
+	<input type='hidden' name ='orderid' value='$varid'>
+	<br>
 	<input type='submit' class='btn btn-danger btn-sm'  name ='no' value='Cancel'>
 	<input type='submit' class='btn btn-success btn-sm'  name ='charge' value='Charge' >
 	</form>

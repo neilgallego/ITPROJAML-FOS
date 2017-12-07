@@ -29,7 +29,7 @@
 			die('Could not Connect to Database' . mysql_error());
 		}
 
-		$query = "SELECT order_id, order_table,order_waiter,order_quantity,order_name,order_price,order_code, order_type, order_time, order_priority
+		$query = "SELECT order_id, order_table,order_waiter,order_quantity,order_name,order_price,order_code, order_type, order_time, order_priority , order_tprice
 						 FROM order_db ORDER BY order_priority ASC";
 
 		$result = mysqli_query( $connection , $query );
@@ -46,6 +46,7 @@
 			$varcode = '';	
 			$vartype = '';
 			$vartime = '';
+			$vartprice = '';
 			
 	
 	 	while($row = mysqli_fetch_array($result , MYSQL_NUM)){
@@ -59,6 +60,7 @@
 			$varcode = $row[6];	
 			$vartype = $row[7];
 		    $vartime = $row[8];
+		    $vartprice = $row[9];
 
 		    //dbnames for order_db
 		    $vardb = 'order_db';
