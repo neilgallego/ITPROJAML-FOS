@@ -12,7 +12,7 @@ echo "
 				<input type='hidden' name ='ordertime' value='$vartime'>
 				<input type='hidden' name ='varchange' value='$varchange'>
 				<input type='hidden' name ='vartprice' value='$vartprice'>
-				<!-- <input type='hidden' name ='id' value='$varid'> -->
+				<input type='hidden' name ='id' value='$varid'>
 
 				<!-- dbase names -->
 	            <input type='hidden' name ='vardb' value='$vardb'>

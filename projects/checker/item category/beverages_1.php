@@ -41,7 +41,7 @@ Please select a category on the left.
 			<?php echo $product_array[$key]["name"]; ?>
 			</strong></div>
 			<div><strong>
-			<?php echo $product_array[$key]["item_regularprice"]; ?>.00
+			<?php echo $product_array[$key]["item_regularprice"]; ?>
 			</strong></div>
 
 		

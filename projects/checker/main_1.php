@@ -57,7 +57,7 @@ body {
            <div class="modal fade" id="myModalassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-                      <iframe height="300px" frameBorder="0" width="100%"  style="border:none; position:absolute; top: 0;" src="assign_waiters.php" name="iframe_a"></iframe>                   
+                      <iframe height="450px" frameBorder="0" width="100%"  style="border:none; position:absolute; top: 0;" src="assign_waiters.php" name="iframe_a"></iframe>                   
                   <div class="modal-footer">
                   </div>
                 </div><!-- /.modal-content -->

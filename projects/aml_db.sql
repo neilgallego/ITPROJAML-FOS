@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2017 at 10:25 AM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: Jan 07, 2018 at 05:08 PM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `aml_db`
@@ -26,12 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin_password`
 --
 
-CREATE TABLE `admin_password` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `admin_password` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin_password`
@@ -46,22 +47,23 @@ INSERT INTO `admin_password` (`id`, `name`, `email`, `password`) VALUES
 -- Table structure for table `assigned_waiters`
 --
 
-CREATE TABLE `assigned_waiters` (
-  `d_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `assigned_waiters` (
+  `d_id` int(11) NOT NULL AUTO_INCREMENT,
   `waiter` varchar(255) DEFAULT NULL,
   `time` time DEFAULT NULL,
-  `date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date` date DEFAULT NULL,
+  PRIMARY KEY (`d_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `assigned_waiters`
 --
 
 INSERT INTO `assigned_waiters` (`d_id`, `waiter`, `time`, `date`) VALUES
-(0, 'ayie', '22:34:41', '2017-12-02'),
-(1, 'gg', '22:34:41', '2017-12-02'),
-(2, 'Cynlai', '22:34:41', '2017-12-02'),
-(3, 'v', '22:34:41', '2017-12-02');
+(0, 'ayie', '00:28:10', '2018-01-07'),
+(1, 'ayie', '00:28:10', '2018-01-07'),
+(2, 'ayie', '00:28:10', '2018-01-07'),
+(3, 'ayie', '00:28:10', '2018-01-07');
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ INSERT INTO `assigned_waiters` (`d_id`, `waiter`, `time`, `date`) VALUES
 -- Table structure for table `billing`
 --
 
-CREATE TABLE `billing` (
+CREATE TABLE IF NOT EXISTS `billing` (
   `bill_id` int(11) NOT NULL,
   `bill_time` time DEFAULT NULL,
   `bill_date` date DEFAULT NULL,
@@ -81,7 +83,8 @@ CREATE TABLE `billing` (
   `transac_no` varchar(65) NOT NULL,
   `total_bill` decimal(65,2) NOT NULL,
   `new_bill` decimal(65,2) NOT NULL,
-  `change` decimal(65,2) NOT NULL
+  `change` decimal(65,2) NOT NULL,
+  PRIMARY KEY (`bill_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -90,8 +93,9 @@ CREATE TABLE `billing` (
 -- Table structure for table `charge_db`
 --
 
-CREATE TABLE `charge_db` (
+CREATE TABLE IF NOT EXISTS `charge_db` (
   `charged_id` int(11) NOT NULL,
+  `charged_code` varchar(255) DEFAULT NULL,
   `charged_table` varchar(255) DEFAULT NULL,
   `charged_waiter` varchar(255) DEFAULT NULL,
   `charged_time` time DEFAULT NULL,
@@ -101,8 +105,23 @@ CREATE TABLE `charge_db` (
   `charged_price` decimal(65,2) DEFAULT NULL,
   `charged_type` varchar(255) DEFAULT NULL,
   `charged_tprice` decimal(65,2) DEFAULT NULL,
-  `charged_priority` varchar(255) DEFAULT NULL
+  `charged_priority` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`charged_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `charge_db`
+--
+
+INSERT INTO `charge_db` (`charged_id`, `charged_code`, `charged_table`, `charged_waiter`, `charged_time`, `charged_date`, `charged_quantity`, `charged_name`, `charged_price`, `charged_type`, `charged_tprice`, `charged_priority`) VALUES
+(1, '215', 'A01', 'Cynlai', '15:21:24', '2017-12-02', 1, 'Sizzling Gambas', '215.00', 'Dine In', '215.00', '1'),
+(2, '215', 'A01', 'sad', '15:21:34', '2017-12-02', 1, 'Sizzling Fried Shrimp with Garlic Sauce', '215.00', 'Dine In', '215.00', '1'),
+(3, '215', 'A01', 'sad', '15:21:46', '2017-12-02', 2, 'Sizzling Pusit', '220.00', 'Dine In', '440.00', '1'),
+(4, '216', 'A02', 'ayie', '15:21:56', '2017-12-02', 6, 'Shanghai Fried Rice', '95.00', 'Dine In', '570.00', '1'),
+(201, '210', 'A04', 'Jay', '00:01:14', '2017-12-01', 1, 'Seafood Fried Rice', '105.00', 'Dine In', '105.00', '1'),
+(202, '210', 'A04', 'ayie', '00:01:16', '2017-12-01', 1, 'Porkchop Rice', '130.00', 'Dine In', '130.00', '1'),
+(203, '210', 'A04', 'ayie', '00:01:17', '2017-12-01', 1, 'Lechon Rice', '130.00', 'Dine In', '130.00', '1'),
+(204, '211', 'A01', 'ayie', '00:01:18', '2017-12-01', 2, 'Smirnoff (Single Shot)', '85.00', 'Dine In', '170.00', '1');
 
 -- --------------------------------------------------------
 
@@ -110,7 +129,7 @@ CREATE TABLE `charge_db` (
 -- Table structure for table `charge_history`
 --
 
-CREATE TABLE `charge_history` (
+CREATE TABLE IF NOT EXISTS `charge_history` (
   `chargedid_history` int(11) NOT NULL,
   `chargedcode_history` varchar(255) DEFAULT NULL,
   `chargedtable_history` varchar(255) DEFAULT NULL,
@@ -122,22 +141,9 @@ CREATE TABLE `charge_history` (
   `chargedprice_history` decimal(65,2) DEFAULT NULL,
   `chargedtype_history` varchar(255) DEFAULT NULL,
   `chargedtprice_history` decimal(65,2) DEFAULT NULL,
-  `chargedpriority_history` varchar(255) DEFAULT NULL
+  `chargedpriority_history` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`chargedid_history`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `charge_history`
---
-
-INSERT INTO `charge_history` (`chargedid_history`, `chargedcode_history`, `chargedtable_history`, `chargedwaiter_history`, `chargedtime_history`, `chargeddate_history`, `chargedquantity_history`, `chargedname_history`, `chargedprice_history`, `chargedtype_history`, `chargedtprice_history`, `chargedpriority_history`) VALUES
-(1, '124', 'A01', 'ayie', '21:12:24', '2017-11-28', 1, 'Seafood Fried Rice', '105.00', 'Dine In', '105.00', '1'),
-(19, '129', 'S05', 'pet', '21:52:52', '2017-11-28', 2, 'Coleslaw Salad', '90.00', 'Take Out', '180.00', '1'),
-(20, '130', 'A03', 'Cynlai', '21:14:22', '2017-11-30', 2, 'Carlos 1 (Single Shot)', '130.00', 'Dine In', '260.00', '1'),
-(21, '130', 'A03', 'gg', '21:14:24', '2017-11-30', 3, 'Remy Martin (Single Shot)', '170.00', 'Dine In', '510.00', '1'),
-(22, '131', 'A06', 'ayie', '21:14:26', '2017-11-30', 1, 'Seafood Fried Rice', '105.00', 'Dine In', '105.00', '1'),
-(23, '131', 'A06', 'gg', '21:14:27', '2017-11-30', 1, 'Garlic Rice', '35.00', 'Dine In', '35.00', '1'),
-(24, '131', 'A06', 'ayie', '21:14:29', '2017-11-30', 1, 'Plain Rice', '30.00', 'Dine In', '30.00', '1'),
-(25, '131', 'A06', 'Cynlai', '21:14:31', '2017-11-30', 1, '	\nGold Schalger (750ml)', '2300.00', 'Dine In', '2300.00', '1');
 
 -- --------------------------------------------------------
 
@@ -145,12 +151,13 @@ INSERT INTO `charge_history` (`chargedid_history`, `chargedcode_history`, `charg
 -- Table structure for table `config_time`
 --
 
-CREATE TABLE `config_time` (
-  `time_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `config_time` (
+  `time_id` int(11) NOT NULL AUTO_INCREMENT,
   `happyhour_from` time NOT NULL,
   `happyhour_to` time NOT NULL,
-  `reghour_from` time NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `reghour_from` time NOT NULL,
+  PRIMARY KEY (`time_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `config_time`
@@ -165,13 +172,14 @@ INSERT INTO `config_time` (`time_id`, `happyhour_from`, `happyhour_to`, `reghour
 -- Table structure for table `employee`
 --
 
-CREATE TABLE `employee` (
-  `emp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `employee` (
+  `emp_id` int(11) NOT NULL AUTO_INCREMENT,
   `Nname` varchar(255) DEFAULT NULL,
   `Position` varchar(255) DEFAULT NULL,
   `Lname` varchar(255) DEFAULT NULL,
-  `charge_amount` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `charge_amount` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`emp_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `employee`
@@ -198,12 +206,13 @@ INSERT INTO `employee` (`emp_id`, `Nname`, `Position`, `Lname`, `charge_amount`)
 -- Table structure for table `item_histroy`
 --
 
-CREATE TABLE `item_histroy` (
-  `itemH_id` int(65) NOT NULL,
+CREATE TABLE IF NOT EXISTS `item_histroy` (
+  `itemH_id` int(65) NOT NULL AUTO_INCREMENT,
   `itemH_name` varchar(65) NOT NULL,
   `itemH_qty` int(65) NOT NULL,
-  `itemH_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `itemH_date` date NOT NULL,
+  PRIMARY KEY (`itemH_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=294 ;
 
 --
 -- Dumping data for table `item_histroy`
@@ -356,7 +365,63 @@ INSERT INTO `item_histroy` (`itemH_id`, `itemH_name`, `itemH_qty`, `itemH_date`)
 (234, 'Chicken Barbeque', 1, '2017-11-30'),
 (235, 'Inihaw na Baboy', 1, '2017-11-30'),
 (236, 'Chicken Sandwich', 2, '2017-11-30'),
-(237, 'Clubhouse Sandwich', 2, '2017-11-30');
+(237, 'Clubhouse Sandwich', 2, '2017-11-30'),
+(238, 'Sizzling Gambas', 1, '2017-12-16'),
+(239, 'Sizzling Fried Shrimp with Garlic Sauce', 1, '2017-12-16'),
+(240, 'Sizzling Pusit', 2, '2017-12-16'),
+(241, 'Shanghai Fried Rice', 6, '2017-12-16'),
+(242, 'Inihaw na Baboy', 1, '2017-12-16'),
+(243, 'Red Horse', 1, '2017-12-16'),
+(244, 'Seafood Fried Rice', 3, '2017-12-16'),
+(245, 'Toss Green Salad', 1, '2017-12-16'),
+(246, 'Clubhouse Sandwich', 2, '2017-12-16'),
+(247, 'Chicken Barbeque', 1, '2017-12-16'),
+(248, 'Coleslaw Salad', 1, '2017-12-16'),
+(249, 'Slippery Nipple', 1, '2017-12-16'),
+(250, 'Vegetable Sticks', 1, '2017-12-16'),
+(251, 'Mixed Fruits', 1, '2017-12-16'),
+(252, 'Toss Green Salad', 1, '2017-12-16'),
+(253, 'Toss Green Salad', 1, '2017-12-16'),
+(254, 'Seafood Fried Rice', 1, '2017-12-16'),
+(255, 'Bull Jagger', 1, '2017-12-16'),
+(256, 'Weng Weng', 1, '2017-12-16'),
+(257, 'Bull Jagger', 1, '2017-12-16'),
+(258, 'Bull Jagger', 1, '2017-12-16'),
+(259, 'Weng Weng', 1, '2017-12-16'),
+(260, 'Toss Green Salad', 1, '2017-12-16'),
+(261, 'Vegetable Sticks', 1, '2017-12-16'),
+(262, 'Seafood Fried Rice', 3, '2017-12-16'),
+(263, 'Mushroom Soup', 1, '2017-12-16'),
+(264, 'Hottotay Soup', 3, '2017-12-16'),
+(265, 'Pancit Canton', 1, '2017-12-16'),
+(266, 'Absolute Blue (750ml)', 1, '2017-12-16'),
+(267, '	\nAbsolute Citron (Single Shot)', 1, '2017-12-16'),
+(268, 'Chicken Barbeque', 3, '2017-12-16'),
+(269, 'Mushroom Soup', 2, '2017-12-16'),
+(270, 'Lechon Rice', 2, '2017-12-16'),
+(271, 'Beef Tapa', 1, '2017-12-16'),
+(272, 'DSAASD', 1, '2017-12-16'),
+(273, 'Lechon Rice', 1, '2017-12-16'),
+(274, 'Seafood Fried Rice', 1, '2017-12-16'),
+(275, 'Shanghai Fried Rice', 1, '2017-12-16'),
+(276, 'Garlic Rice', 1, '2017-12-16'),
+(277, 'Pork Barbeque', 1, '2017-12-16'),
+(278, 'Chicken Barbeque', 3, '2017-12-16'),
+(279, 'Chicken Sandwich', 2, '2017-12-16'),
+(280, 'Ham & Chess Sandwich', 1, '2017-12-16'),
+(281, 'Tangueray Gin (Single Shot)', 1, '2017-12-16'),
+(282, 'Bacardi Gold (Single Shot)', 1, '2017-12-16'),
+(283, 'Cuervo Gold (750ml)', 1, '2017-12-16'),
+(284, 'Chicken Barbeque', 1, '2017-12-16'),
+(285, 'Inihaw na Baboy', 1, '2017-12-16'),
+(286, 'Chicken Sandwich', 2, '2017-12-16'),
+(287, 'Clubhouse Sandwich', 2, '2017-12-16'),
+(288, 'Chicken Sandwich', 2, '2017-12-16'),
+(289, 'Ham & Egg Sandwich', 1, '2017-12-16'),
+(290, 'Ham & Chess Sandwich', 1, '2017-12-16'),
+(291, 'Smirnoff (Single Shot)', 2, '2017-12-16'),
+(292, 'Chicken Sandwich', 1, '2017-12-16'),
+(293, 'Ham & Chess Sandwich', 1, '2017-12-16');
 
 -- --------------------------------------------------------
 
@@ -364,8 +429,8 @@ INSERT INTO `item_histroy` (`itemH_id`, `itemH_name`, `itemH_qty`, `itemH_date`)
 -- Table structure for table `menu_db`
 --
 
-CREATE TABLE `menu_db` (
-  `menuitem_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `menu_db` (
+  `menuitem_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `item_category` varchar(255) DEFAULT NULL,
   `item_happyprice` double(65,2) DEFAULT NULL,
@@ -373,8 +438,10 @@ CREATE TABLE `menu_db` (
   `item_availability` enum('not available','available') DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
   `item_commission` double(65,2) DEFAULT NULL,
-  `item_discount` double(65,2) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `item_discount` double(65,2) DEFAULT NULL,
+  PRIMARY KEY (`menuitem_id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=198 ;
 
 --
 -- Dumping data for table `menu_db`
@@ -396,7 +463,7 @@ INSERT INTO `menu_db` (`menuitem_id`, `name`, `item_category`, `item_happyprice`
 (13, 'Fried Onion Rings', 'Appetizer', 100.00, 120.00, 'available', 'AP13', 3.00, 0.00),
 (14, 'Shanghai Lumpia', 'Appetizer', 120.00, 140.00, 'available', 'AP14', 6.00, 0.00),
 (15, 'Beef Tapa', 'Appetizer', 150.00, 160.00, 'available', 'AP15', 6.00, 0.00),
-(16, 'Tokwa\'t Baboy', 'Appetizer', 100.00, 120.00, 'available', 'AP16', 3.00, 0.00),
+(16, 'Tokwa''t Baboy', 'Appetizer', 100.00, 120.00, 'available', 'AP16', 3.00, 0.00),
 (17, 'Kilawen Tanguigui', 'Appetizer', 225.00, 240.00, 'available', 'AP17', 6.00, 0.00),
 (18, 'Hotdog with Onions', 'Appetizer', 100.00, 120.00, 'available', 'AP18', 3.00, 0.00),
 (19, 'French Fried', 'Appetizer', 120.00, 140.00, 'available', 'AP19', 6.00, 0.00),
@@ -413,7 +480,7 @@ INSERT INTO `menu_db` (`menuitem_id`, `name`, `item_category`, `item_happyprice`
 (31, 'Sizzling Tanguigui', 'Sizzling', 250.00, 280.00, 'available', 'SZ07', 6.00, 0.00),
 (32, 'Sizzling Porkchop', 'Sizzling', 175.00, 190.00, 'available', 'SZ08', 6.00, 0.00),
 (33, 'Sizzling Hotdog', 'Sizzling', 140.00, 150.00, 'available', 'SZ09', 6.00, 0.00),
-(34, 'Alberto\'s Special', 'Sandwiches', 150.00, 150.00, 'available', 'SW01', 0.00, 0.00),
+(34, 'Alberto''s Special', 'Sandwiches', 150.00, 150.00, 'available', 'SW01', 0.00, 0.00),
 (35, 'Clubhouse Sandwich', 'Sandwiches', 130.00, 130.00, 'available', 'SW02', 0.00, 0.00),
 (36, 'Chicken Sandwich', 'Sandwiches', 60.00, 60.00, 'available', 'SW03', 0.00, 0.00),
 (37, 'Ham & Egg Sandwich', 'Sandwiches', 60.00, 60.00, 'available', 'SW04', 0.00, 0.00),
@@ -430,7 +497,7 @@ INSERT INTO `menu_db` (`menuitem_id`, `name`, `item_category`, `item_happyprice`
 (48, 'Garlic Rice', 'Rice Toppings', 35.00, 35.00, 'available', 'RT06', 0.00, 0.00),
 (49, 'Plain Rice', 'Rice Toppings', 30.00, 30.00, 'available', 'RT07', 0.00, 0.00),
 (50, 'Mixed Fruits', 'Salads', 350.00, 400.00, 'available', 'SD01', 6.00, 0.00),
-(51, 'Chef\'s Salad', 'Salads', 110.00, 120.00, 'available', 'SD02', 0.00, 0.00),
+(51, 'Chef''s Salad', 'Salads', 110.00, 120.00, 'available', 'SD02', 0.00, 0.00),
 (52, 'Vegetable Sticks', 'Salads', 120.00, 130.00, 'available', 'SD03', 0.00, 0.00),
 (53, 'Toss Green Salad', 'Salads', 100.00, 100.00, 'available', 'SD04', 0.00, 0.00),
 (54, 'Coleslaw Salad', 'Salads', 90.00, 100.00, 'available', 'SD05', 0.00, 0.00),
@@ -552,8 +619,8 @@ INSERT INTO `menu_db` (`menuitem_id`, `name`, `item_category`, `item_happyprice`
 -- Table structure for table `order_db`
 --
 
-CREATE TABLE `order_db` (
-  `order_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `order_db` (
+  `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_code` varchar(255) DEFAULT NULL,
   `order_table` varchar(255) DEFAULT NULL,
   `order_waiter` varchar(255) DEFAULT NULL,
@@ -564,15 +631,9 @@ CREATE TABLE `order_db` (
   `order_price` double(65,2) DEFAULT NULL,
   `order_type` varchar(255) DEFAULT NULL,
   `order_tprice` decimal(65,2) DEFAULT NULL,
-  `order_priority` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `order_db`
---
-
-INSERT INTO `order_db` (`order_id`, `order_code`, `order_table`, `order_waiter`, `order_time`, `order_date`, `order_quantity`, `order_name`, `order_price`, `order_type`, `order_tprice`, `order_priority`) VALUES
-(9, '215', 'A01', 'sad', '17:29:21', '2017-12-05', 100, 'Crispy Pata', 440.00, 'Dine In', '440.00', '2');
+  `order_priority` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
 
 -- --------------------------------------------------------
 
@@ -580,8 +641,8 @@ INSERT INTO `order_db` (`order_id`, `order_code`, `order_table`, `order_waiter`,
 -- Table structure for table `paid_db`
 --
 
-CREATE TABLE `paid_db` (
-  `paid_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `paid_db` (
+  `paid_id` int(11) NOT NULL AUTO_INCREMENT,
   `paid_code` varchar(255) DEFAULT NULL,
   `paid_table` varchar(255) DEFAULT NULL,
   `paid_waiter` varchar(255) DEFAULT NULL,
@@ -591,51 +652,20 @@ CREATE TABLE `paid_db` (
   `paid_name` varchar(45) DEFAULT NULL,
   `paid_price` decimal(65,2) DEFAULT NULL,
   `paid_type` varchar(255) DEFAULT NULL,
-  `paid_tprice` decimal(65,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `paid_tprice` decimal(65,2) DEFAULT NULL,
+  PRIMARY KEY (`paid_id`),
+  KEY `paid_id` (`paid_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
 
 --
 -- Dumping data for table `paid_db`
 --
 
 INSERT INTO `paid_db` (`paid_id`, `paid_code`, `paid_table`, `paid_waiter`, `paid_time`, `paid_date`, `paid_quantity`, `paid_name`, `paid_price`, `paid_type`, `paid_tprice`) VALUES
-(123, '175', 'A01', 'Cynlai', '17:43:28', '2017-12-01', 1, 'Bull Jagger', '110.00', 'Dine In', '110.00'),
-(124, '176', 'B01', 'Cynlai', '17:43:53', '2017-12-01', 1, 'Weng Weng', '110.00', 'Dine In', '110.00'),
-(125, '177', 'C01', 'ayie', '17:45:24', '2017-12-01', 1, 'Bull Jagger', '110.00', 'Dine In', '110.00'),
-(126, '178', 'D01', 'v', '17:45:34', '2017-12-01', 1, 'Bull Jagger', '110.00', 'Dine In', '110.00'),
-(127, '179', 'S01', 'ayie', '17:45:47', '2017-12-01', 1, 'Weng Weng', '110.00', 'Dine In', '110.00'),
-(128, '180', 'A01', 'ayie', '17:51:06', '2017-12-01', 1, 'Toss Green Salad', '100.00', 'Dine In', '100.00'),
-(129, '180', 'A01', 'ayie', '17:51:06', '2017-12-01', 1, 'Vegetable Sticks', '120.00', 'Dine In', '120.00'),
-(130, '181', 'A02', 'Cynlai', '17:52:36', '2017-12-01', 3, 'Seafood Fried Rice', '105.00', 'Dine In', '315.00'),
-(131, '182', 'A03', 'Cynlai', '18:04:42', '2017-12-01', 1, 'Mushroom Soup', '120.00', 'Dine In', '120.00'),
-(132, '182', 'A03', 'Cynlai', '18:04:42', '2017-12-01', 3, 'Hottotay Soup', '120.00', 'Dine In', '360.00'),
-(133, '182', 'A03', 'Cynlai', '18:04:42', '2017-12-01', 1, 'Pancit Canton', '130.00', 'Dine In', '130.00'),
-(134, '183', 'A02', 'ayie', '18:07:43', '2017-12-01', 1, 'Absolute Blue (750ml)', '1900.00', 'Dine In', '1900.00'),
-(135, '183', 'A02', 'ayie', '18:07:43', '2017-12-01', 1, '	\nAbsolute Citron (Single Shot)', '95.00', 'Dine In', '95.00'),
-(136, '184', 'A01', 'Cynlai', '18:13:09', '2017-12-01', 3, 'Chicken Barbeque', '100.00', 'Dine In', '300.00'),
-(137, '185', 'A02', 'ayie', '18:13:38', '2017-12-01', 2, 'Mushroom Soup', '120.00', 'Dine In', '240.00'),
-(138, '186', 'A01', 'Cynlai', '18:14:33', '2017-12-01', 2, 'Lechon Rice', '130.00', 'Dine In', '260.00'),
-(139, '187', 'A02', 'Cynlai', '18:15:49', '2017-12-01', 1, 'Beef Tapa', '150.00', 'Dine In', '150.00'),
-(140, '187', 'A02', 'Cynlai', '18:15:49', '2017-12-01', 1, 'DSAASD', '1.00', 'Dine In', '1.00'),
-(141, '188', 'C22', 'ayie', '18:17:42', '2017-12-01', 1, 'Lechon Rice', '130.00', 'Dine In', '130.00'),
-(142, '188', 'C22', 'ayie', '18:17:42', '2017-12-01', 1, 'Seafood Fried Rice', '105.00', 'Dine In', '105.00'),
-(143, '188', 'C22', 'ayie', '18:17:42', '2017-12-01', 1, 'Shanghai Fried Rice', '95.00', 'Dine In', '95.00'),
-(144, '188', 'C22', 'ayie', '18:17:42', '2017-12-01', 1, 'Garlic Rice', '35.00', 'Dine In', '35.00'),
-(145, '189', 'D04', 'Cynlai', '18:18:03', '2017-12-01', 1, 'Pork Barbeque', '70.00', 'Dine In', '70.00'),
-(146, '189', 'D04', 'Cynlai', '18:18:03', '2017-12-01', 3, 'Chicken Barbeque', '100.00', 'Dine In', '300.00'),
-(147, '190', 'B03', 'Cynlai', '18:19:30', '2017-12-01', 2, 'Chicken Sandwich', '60.00', 'Dine In', '120.00'),
-(148, '190', 'B03', 'Cynlai', '18:19:30', '2017-12-01', 1, 'Ham & Chess Sandwich', '60.00', 'Dine In', '60.00'),
-(149, '191', 'C04', 'ayie', '18:19:49', '2017-12-01', 1, 'Tangueray Gin (Single Shot)', '85.00', 'Dine In', '85.00'),
-(150, '191', 'C04', 'ayie', '18:19:49', '2017-12-01', 1, 'Bacardi Gold (Single Shot)', '85.00', 'Dine In', '85.00'),
-(151, '191', 'C04', 'ayie', '18:19:49', '2017-12-01', 1, 'Cuervo Gold (750ml)', '2100.00', 'Dine In', '2100.00'),
-(152, '192', 'B01', 'ayie', '18:20:44', '2017-12-01', 1, 'Chicken Barbeque', '100.00', 'Dine In', '100.00'),
-(153, '192', 'B01', 'ayie', '18:20:44', '2017-12-01', 1, 'Inihaw na Baboy', '110.00', 'Dine In', '110.00'),
-(154, '193', 'C01', 'v', '18:21:20', '2017-12-01', 2, 'Chicken Sandwich', '60.00', 'Dine In', '120.00'),
-(155, '193', 'C01', 'v', '18:21:20', '2017-12-01', 2, 'Clubhouse Sandwich', '130.00', 'Dine In', '260.00'),
-(198, '209', 'A01', 'Cynlai', '23:57:01', '2017-12-01', 2, 'Chicken Sandwich', '60.00', 'Dine In', '120.00'),
-(199, '209', 'A01', 'Cynlai', '23:57:01', '2017-12-01', 1, 'Ham & Egg Sandwich', '60.00', 'Dine In', '60.00'),
-(200, '209', 'A01', 'Cynlai', '23:57:01', '2017-12-01', 1, 'Ham & Chess Sandwich', '60.00', 'Dine In', '60.00'),
-(204, '211', 'A01', 'ayie', '00:07:32', '2017-12-01', 2, 'Smirnoff (Single Shot)', '85.00', 'Dine In', '170.00');
+(119, '297', 'A01', 'ayie', '23:41:23', '2018-01-07', 1, 'Ham & Egg Sandwich', '60.00', 'Dine In', '60.00'),
+(121, '298', 'A03', 'ayie', '23:45:16', '2018-01-07', 1, 'Inihaw na Baboy', '110.00', 'Dine In', '110.00'),
+(122, '299', 'A08', 'ayie', '00:06:11', '2018-01-07', 1, 'Ham & Egg Sandwich', '60.00', 'Dine In', '60.00'),
+(124, '299', 'A08', 'ayie', '00:06:11', '2018-01-07', 1, 'Chicken Sandwich', '60.00', 'Dine In', '60.00');
 
 -- --------------------------------------------------------
 
@@ -643,10 +673,11 @@ INSERT INTO `paid_db` (`paid_id`, `paid_code`, `paid_table`, `paid_waiter`, `pai
 -- Table structure for table `sales_db`
 --
 
-CREATE TABLE `sales_db` (
-  `sales_id` int(11) NOT NULL,
-  `total_item_sale` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `sales_db` (
+  `sales_id` int(11) NOT NULL AUTO_INCREMENT,
+  `total_item_sale` double DEFAULT NULL,
+  PRIMARY KEY (`sales_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -654,7 +685,7 @@ CREATE TABLE `sales_db` (
 -- Table structure for table `served_db`
 --
 
-CREATE TABLE `served_db` (
+CREATE TABLE IF NOT EXISTS `served_db` (
   `served_id` int(11) NOT NULL,
   `served_code` varchar(255) DEFAULT NULL,
   `served_table` varchar(255) DEFAULT NULL,
@@ -666,22 +697,9 @@ CREATE TABLE `served_db` (
   `served_price` decimal(65,2) DEFAULT NULL,
   `served_type` varchar(255) DEFAULT NULL,
   `served_tprice` double(65,2) DEFAULT NULL,
-  `served_priority` varchar(255) DEFAULT NULL
+  `served_priority` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`served_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `served_db`
---
-
-INSERT INTO `served_db` (`served_id`, `served_code`, `served_table`, `served_waiter`, `served_time`, `served_date`, `served_quantity`, `served_name`, `served_price`, `served_type`, `served_tprice`, `served_priority`) VALUES
-(3, '215', 'A01', 'sad', '22:34:57', '2017-12-02', 2, 'Sizzling Pusit', '220.00', 'Dine In', 440.00, '1'),
-(4, '216', 'A02', 'ayie', '19:57:22', '2017-12-02', 6, 'Shanghai Fried Rice', '95.00', 'Dine In', 570.00, '1'),
-(6, '217', ' A03', 'peps', '19:02:45', '2017-12-02', 100, '1/2 Fried Chicken Garlic Sauce', '220.00', 'Dine In', 220.00, '2'),
-(7, '217', 'A06', 'peps', '18:33:42', '2017-12-02', 2, 'Lechon Rice', '130.00', 'Dine In', 260.00, '2'),
-(8, '217', 'A06', 'peps', '18:33:41', '2017-12-02', 1, 'Porkchop Rice', '130.00', 'Dine In', 130.00, '2'),
-(11, '215', ' A01', 'Cynlai', '18:09:04', '2017-12-05', 30, 'Cold Cuts', '350.00', 'Dine In', 10500.00, '2'),
-(207, '213', 'A03', 'ayie', '00:08:56', '2017-12-02', 1, 'Chicken Sandwich', '60.00', 'Dine In', 60.00, '2'),
-(208, '213', 'A03', 'ayie', '00:08:56', '2017-12-02', 1, 'Ham & Chess Sandwich', '60.00', 'Dine In', 60.00, '2');
 
 -- --------------------------------------------------------
 
@@ -689,12 +707,13 @@ INSERT INTO `served_db` (`served_id`, `served_code`, `served_table`, `served_wai
 -- Table structure for table `table_db`
 --
 
-CREATE TABLE `table_db` (
-  `table_id` int(25) NOT NULL,
+CREATE TABLE IF NOT EXISTS `table_db` (
+  `table_id` int(25) NOT NULL AUTO_INCREMENT,
   `table_name` varchar(20) DEFAULT NULL,
   `table_column` varchar(45) DEFAULT NULL,
-  `table_number` int(65) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `table_number` int(65) NOT NULL,
+  PRIMARY KEY (`table_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
 
 --
 -- Dumping data for table `table_db`
@@ -801,12 +820,13 @@ INSERT INTO `table_db` (`table_id`, `table_name`, `table_column`, `table_number`
 -- Table structure for table `table_orders`
 --
 
-CREATE TABLE `table_orders` (
-  `table_orders_id` int(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `table_orders` (
+  `table_orders_id` int(255) NOT NULL AUTO_INCREMENT,
   `table_orders_serverid` int(255) NOT NULL,
   `table_orders_tableid` int(255) NOT NULL,
-  `table_order_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `table_order_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`table_orders_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=300 ;
 
 --
 -- Dumping data for table `table_orders`
@@ -1031,7 +1051,87 @@ INSERT INTO `table_orders` (`table_orders_id`, `table_orders_serverid`, `table_o
 (216, 0, 0, '2017-12-02 07:21:17'),
 (217, 0, 0, '2017-12-02 10:33:39'),
 (218, 0, 0, '2017-12-02 11:57:15'),
-(219, 0, 0, '2017-12-02 12:16:49');
+(219, 0, 0, '2017-12-02 12:16:49'),
+(220, 0, 0, '2017-12-10 13:50:15'),
+(221, 0, 0, '2017-12-10 13:50:44'),
+(222, 0, 0, '2017-12-10 14:07:29'),
+(223, 0, 0, '2017-12-14 16:56:43'),
+(224, 0, 0, '2017-12-14 16:56:49'),
+(225, 0, 0, '2017-12-14 17:24:56'),
+(226, 0, 0, '2017-12-14 17:43:53'),
+(227, 0, 0, '2017-12-14 18:13:26'),
+(228, 0, 0, '2017-12-14 18:19:59'),
+(229, 0, 0, '2017-12-14 18:20:18'),
+(230, 0, 0, '2017-12-14 18:20:40'),
+(231, 0, 0, '2017-12-14 18:21:33'),
+(232, 0, 0, '2017-12-17 14:36:27'),
+(233, 0, 0, '2017-12-17 14:46:02'),
+(234, 0, 0, '2017-12-17 14:50:43'),
+(235, 0, 0, '2017-12-17 14:50:48'),
+(236, 0, 0, '2017-12-17 14:50:55'),
+(237, 0, 0, '2017-12-17 14:51:01'),
+(238, 0, 0, '2017-12-17 14:51:07'),
+(239, 0, 0, '2017-12-17 15:10:04'),
+(240, 0, 0, '2017-12-17 15:10:12'),
+(241, 0, 0, '2017-12-17 15:11:00'),
+(242, 0, 0, '2017-12-17 15:15:44'),
+(243, 0, 0, '2017-12-17 15:16:22'),
+(244, 0, 0, '2017-12-17 15:18:14'),
+(245, 0, 0, '2017-12-17 15:41:20'),
+(246, 0, 0, '2017-12-17 15:41:58'),
+(247, 0, 0, '2017-12-17 15:42:51'),
+(248, 0, 0, '2017-12-17 16:00:48'),
+(249, 0, 0, '2017-12-17 16:01:23'),
+(250, 0, 0, '2017-12-17 16:02:10'),
+(251, 0, 0, '2018-01-04 14:26:40'),
+(252, 0, 0, '2018-01-04 14:26:46'),
+(253, 0, 0, '2018-01-04 14:27:01'),
+(254, 0, 0, '2018-01-04 14:28:05'),
+(255, 0, 0, '2018-01-04 14:28:32'),
+(256, 0, 0, '2018-01-05 17:38:32'),
+(257, 0, 0, '2018-01-06 13:24:50'),
+(258, 0, 0, '2018-01-06 13:33:38'),
+(259, 0, 0, '2018-01-06 14:01:51'),
+(260, 0, 0, '2018-01-06 14:14:08'),
+(261, 0, 0, '2018-01-06 14:14:16'),
+(262, 0, 0, '2018-01-06 14:14:27'),
+(263, 0, 0, '2018-01-06 14:30:56'),
+(264, 0, 0, '2018-01-06 15:09:26'),
+(265, 0, 0, '2018-01-06 15:14:18'),
+(266, 0, 0, '2018-01-06 15:49:09'),
+(267, 0, 0, '2018-01-06 15:57:35'),
+(268, 0, 0, '2018-01-06 16:28:18'),
+(269, 0, 0, '2018-01-06 16:40:33'),
+(270, 0, 0, '2018-01-06 16:41:13'),
+(271, 0, 0, '2018-01-06 16:54:43'),
+(272, 0, 0, '2018-01-06 16:57:02'),
+(273, 0, 0, '2018-01-06 17:03:18'),
+(274, 0, 0, '2018-01-06 17:03:55'),
+(275, 0, 0, '2018-01-06 17:13:12'),
+(276, 0, 0, '2018-01-06 17:29:26'),
+(277, 0, 0, '2018-01-06 18:04:00'),
+(278, 0, 0, '2018-01-06 18:05:56'),
+(279, 0, 0, '2018-01-06 18:06:13'),
+(280, 0, 0, '2018-01-06 18:06:21'),
+(281, 0, 0, '2018-01-06 19:40:30'),
+(282, 0, 0, '2018-01-07 06:31:24'),
+(283, 0, 0, '2018-01-07 06:32:10'),
+(284, 0, 0, '2018-01-07 06:32:42'),
+(285, 0, 0, '2018-01-07 06:35:30'),
+(286, 0, 0, '2018-01-07 06:46:19'),
+(287, 0, 0, '2018-01-07 06:51:11'),
+(288, 0, 0, '2018-01-07 06:53:15'),
+(289, 0, 0, '2018-01-07 06:57:53'),
+(290, 0, 0, '2018-01-07 07:03:28'),
+(291, 0, 0, '2018-01-07 14:07:50'),
+(292, 0, 0, '2018-01-07 14:11:45'),
+(293, 0, 0, '2018-01-07 14:13:53'),
+(294, 0, 0, '2018-01-07 14:14:54'),
+(295, 0, 0, '2018-01-07 14:21:15'),
+(296, 0, 0, '2018-01-07 14:22:59'),
+(297, 0, 0, '2018-01-07 14:29:07'),
+(298, 0, 0, '2018-01-07 14:29:12'),
+(299, 0, 0, '2018-01-07 14:29:22');
 
 -- --------------------------------------------------------
 
@@ -1039,8 +1139,8 @@ INSERT INTO `table_orders` (`table_orders_id`, `table_orders_serverid`, `table_o
 -- Table structure for table `transaction`
 --
 
-CREATE TABLE `transaction` (
-  `transac_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `transaction` (
+  `transac_id` int(11) NOT NULL AUTO_INCREMENT,
   `transac_time` time NOT NULL,
   `transac_date` date NOT NULL,
   `transac_table` varchar(65) DEFAULT NULL,
@@ -1051,17 +1151,9 @@ CREATE TABLE `transaction` (
   `transac_card` varchar(65) DEFAULT NULL,
   `transac_total` decimal(65,2) NOT NULL,
   `transac_newbill` decimal(65,2) NOT NULL,
-  `transac_change` decimal(65,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaction`
---
-
-INSERT INTO `transaction` (`transac_id`, `transac_time`, `transac_date`, `transac_table`, `transac_sc`, `transac_pax`, `transac_discounts`, `transac_cash`, `transac_card`, `transac_total`, `transac_newbill`, `transac_change`) VALUES
-(10, '23:57:04', '2017-12-01', 'A01', 0, 0, '0.00', '240.00', '', '240.00', '0.00', '0.00'),
-(11, '00:07:34', '2017-12-02', 'A01', 0, 0, '0.00', '170.00', '', '170.00', '0.00', '0.00'),
-(12, '00:07:43', '2017-12-02', 'OnTheHouse', 0, 0, '0.00', '0.00', NULL, '0.00', '0.00', '0.00');
+  `transac_change` decimal(65,2) NOT NULL,
+  PRIMARY KEY (`transac_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=166 ;
 
 -- --------------------------------------------------------
 
@@ -1069,8 +1161,8 @@ INSERT INTO `transaction` (`transac_id`, `transac_time`, `transac_date`, `transa
 -- Table structure for table `transaction_history`
 --
 
-CREATE TABLE `transaction_history` (
-  `transacH_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `transaction_history` (
+  `transacH_id` int(11) NOT NULL AUTO_INCREMENT,
   `transacH_time` time NOT NULL,
   `transacH_date` date NOT NULL,
   `transacH_table` varchar(65) DEFAULT NULL,
@@ -1081,41 +1173,59 @@ CREATE TABLE `transaction_history` (
   `transacH_card` varchar(65) NOT NULL,
   `transacH_total` decimal(65,2) NOT NULL,
   `transacH_newbill` decimal(65,2) NOT NULL,
-  `transacH_change` decimal(65,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `transacH_change` decimal(65,2) NOT NULL,
+  PRIMARY KEY (`transacH_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `transaction_history`
 --
 
 INSERT INTO `transaction_history` (`transacH_id`, `transacH_time`, `transacH_date`, `transacH_table`, `transacH_sc`, `transacH_pax`, `transacH_discounts`, `transacH_cash`, `transacH_card`, `transacH_total`, `transacH_newbill`, `transacH_change`) VALUES
-(1, '17:43:33', '2017-12-01', 'A01', 0, 0, '0.00', '110.00', '', '110.00', '0.00', '0.00'),
-(2, '17:45:28', '2017-12-01', 'C01', 0, 0, '0.00', '110.00', '', '110.00', '0.00', '0.00'),
-(3, '17:45:42', '2017-12-01', 'D01', 0, 0, '0.00', '110.00', '', '110.00', '0.00', '0.00'),
-(4, '17:45:49', '2017-12-01', 'S01', 0, 0, '0.00', '110.00', '', '110.00', '0.00', '0.00'),
-(5, '17:51:20', '2017-12-01', 'A01', 0, 0, '0.00', '220.00', '', '220.00', '0.00', '0.00'),
-(6, '17:52:41', '2017-12-01', 'A02', 0, 0, '0.00', '320.00', '', '315.00', '0.00', '5.00'),
-(7, '17:52:57', '2017-12-01', 'C02', 0, 0, '0.00', '67867.00', '', '0.00', '0.00', '67867.00'),
-(8, '18:07:45', '2017-12-01', 'A02', 0, 0, '0.00', '2000.00', '', '1995.00', '0.00', '5.00'),
-(9, '18:08:52', '2017-12-01', 'A01', 0, 0, '0.00', '1.00', '', '0.00', '0.00', '1.00'),
-(10, '18:13:11', '2017-12-01', 'A01', 0, 0, '0.00', '300.00', '', '300.00', '0.00', '30.00'),
-(11, '18:13:40', '2017-12-01', 'A02', 0, 0, '0.00', '250.00', '', '240.00', '0.00', '10.00'),
-(12, '18:14:36', '2017-12-01', 'A01', 0, 0, '0.00', '300.00', '', '260.00', '0.00', '40.00'),
-(13, '18:15:51', '2017-12-01', 'A02', 0, 0, '0.00', '155.00', '', '151.00', '0.00', '4.00'),
-(14, '18:19:34', '2017-12-01', 'B03', 0, 0, '0.00', '200.00', '', '180.00', '0.00', '20.00'),
-(15, '18:19:53', '2017-12-01', 'C04', 0, 0, '0.00', '2270.00', '', '2270.00', '0.00', '363.20'),
-(16, '18:20:14', '2017-12-01', 'A01', 0, 0, '0.00', '3.00', '', '0.00', '0.00', '3.00'),
-(17, '18:20:48', '2017-12-01', 'B01', 0, 0, '0.00', '210.00', '', '210.00', '0.00', '0.00'),
-(18, '18:21:22', '2017-12-01', 'C01', 0, 0, '0.00', '400.00', '', '380.00', '0.00', '20.00'),
-(32, '22:31:27', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(33, '22:31:33', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(34, '22:32:19', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(35, '22:32:38', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(36, '22:33:30', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', 'OnTheHouse', '0.00', '0.00', '0.00'),
-(37, '22:34:13', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(38, '22:35:41', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(39, '22:35:49', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
-(40, '22:36:07', '2017-12-01', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00');
+(1, '22:06:29', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(2, '22:06:33', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(3, '22:07:35', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(4, '22:07:37', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(5, '22:07:54', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(6, '22:08:06', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(7, '22:08:09', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(8, '22:10:22', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(9, '22:10:30', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(10, '22:10:44', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(11, '22:11:39', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(12, '22:11:48', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(13, '22:11:55', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(14, '22:13:06', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(15, '22:13:09', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(16, '22:13:58', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(17, '22:14:04', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(18, '22:15:04', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(19, '22:15:09', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(20, '22:15:20', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(21, '22:17:11', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(22, '22:17:19', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(23, '22:17:22', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(24, '22:18:09', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(25, '22:18:12', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(26, '22:18:15', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(27, '22:18:20', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(28, '22:18:23', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(29, '22:19:29', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(30, '22:19:44', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(31, '22:21:36', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(32, '22:22:12', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(33, '22:23:05', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(34, '22:23:29', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(35, '22:23:33', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(36, '22:24:34', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(37, '22:27:59', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(38, '22:28:03', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(39, '22:28:06', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(40, '22:29:34', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(41, '22:29:53', '2018-01-07', 'OnTheHouse', 0, 0, '0.00', '0.00', '', '0.00', '0.00', '0.00'),
+(64, '23:41:25', '2018-01-07', 'A01', 0, 0, '0.00', '60.00', '', '60.00', '0.00', '0.00'),
+(65, '23:45:18', '2018-01-07', 'A03', 0, 0, '0.00', '110.00', '', '110.00', '0.00', '0.00'),
+(66, '00:06:12', '2018-01-08', 'A08', 0, 0, '0.00', '120.00', '', '120.00', '0.00', '0.00');
 
 -- --------------------------------------------------------
 
@@ -1123,25 +1233,33 @@ INSERT INTO `transaction_history` (`transacH_id`, `transacH_time`, `transacH_dat
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
-  `status` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `password`, `email`, `position`, `status`) VALUES
-(59, 'admin', 'admin', 'admin', '7488e331b8b64e5794da3fa4eb10ad5d', '', 'Admin', 'Active'),
-(60, 'checker', 'checker', 'checker', '7eea68c4393b2b26d0e4ebd05c9daf34', '', 'Checker', 'Active'),
-(58, 'cashier', 'cashier', 'cashier', 'fb94a64d00a870ffb9e78912dacb8cb5', '', 'Cashier', 'Active');
+(22, 'Rrhyy', 'Rrhy', 'Bacwaden', '12345', 'rrrhybacwaden@gmail.com', 'Admin', 'Active'),
+(36, 'Princes', 'Princes', 'Criste', 'abc', 'princes@gmail.com', 'Checker', 'Active'),
+(35, 'Steven', 'Steven', 'Bitmead', '12345', 'Steven@gmail.com', 'Admin', 'Active'),
+(34, 'Niel', 'Niel', 'Gallego', '12345', 'niel@gmail.com', 'Cashier', 'Active'),
+(33, 'Leonard', 'Leonard', 'Tagarino', '12345', 'leo@gmail.com', 'Cashier', 'Active'),
+(31, 'Cynlai', 'Cynlai', 'Osorio', '12345', 'cynlaii@gmail.com', 'Checker', 'Active'),
+(38, 'checker', 'Neil Kevin', 'Gallego', '12345', 'Neil@gmail.com', 'Checker', 'Active'),
+(55, 'cashier', 'Cynlai', 'Osorio', '12345', 'cynlai@gmail.com', 'Cashier', 'Active'),
+(56, 'admin', 'Steven', 'Bitmead', '12345', 'steven@gmail.com', 'Admin', 'Active'),
+(57, '1234556673423423432432', 'rewrwr', 'dfsdfsdfdss', '12345678', '', 'Checker', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1149,210 +1267,48 @@ INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `password`, `ema
 -- Table structure for table `waitercomm_history`
 --
 
-CREATE TABLE `waitercomm_history` (
-  `commid_history` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `waitercomm_history` (
+  `commid_history` int(11) NOT NULL AUTO_INCREMENT,
   `itemcomm_history` decimal(65,2) DEFAULT NULL,
   `itemtype_history` enum('drinks','dish') DEFAULT NULL,
   `time_history` time NOT NULL,
   `date_history` date NOT NULL,
   `waitername_history` varchar(255) NOT NULL,
-  `iname_history` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `iname_history` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`commid_history`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `waitercomm_history`
 --
 
 INSERT INTO `waitercomm_history` (`commid_history`, `itemcomm_history`, `itemtype_history`, `time_history`, `date_history`, `waitername_history`, `iname_history`) VALUES
-(1, '2.00', NULL, '21:23:35', '2017-11-28', 'gg', 'Pitcher'),
-(2, '0.00', NULL, '21:23:35', '2017-11-28', 'gg', 'Mug'),
-(3, '6.00', NULL, '21:23:35', '2017-11-28', 'gg', 'Barrel'),
-(4, '0.50', NULL, '21:23:35', '2017-11-28', 'gg', 'San Miguel Pale Pilsen'),
-(5, '0.50', NULL, '21:23:35', '2017-11-28', 'gg', 'San Miguel Light (Apple/Lemon)'),
-(6, '0.50', NULL, '21:23:35', '2017-11-28', 'gg', 'Red Horse'),
-(7, '10.00', NULL, '21:23:35', '2017-11-28', 'gg', 'Beer Tower'),
-(8, '3.00', NULL, '21:49:26', '2017-11-28', 'ayie', 'Pork Barbeque'),
-(9, '6.00', NULL, '21:49:26', '2017-11-28', 'ayie', 'Inihaw na Baboy'),
-(10, '3.00', NULL, '21:49:26', '2017-11-28', 'ayie', 'Chicken Barbeque'),
-(11, '0.00', NULL, '21:52:44', '2017-11-28', 'ayie', 'Coleslaw Salad'),
-(16, '2.00', NULL, '21:13:58', '2017-11-30', 'Cynlai', 'Carlos 1 (Single Shot)'),
-(17, '2.00', NULL, '21:13:58', '2017-11-30', 'Cynlai', 'Remy Martin (Single Shot)'),
-(18, '0.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', 'Seafood Fried Rice'),
-(19, '0.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', 'Garlic Rice'),
-(20, '0.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', 'Plain Rice'),
-(21, '19.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', '	\nGold Schalger (750ml)'),
-(22, '2.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', '	\nTequila Rose (Single Shot)'),
-(23, '2.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', 'Kahlua (Single Shot)'),
-(24, '2.00', NULL, '21:14:15', '2017-11-30', 'Cynlai', 'Margarita'),
-(25, '2.00', NULL, '21:30:43', '2017-11-30', 'Cynlai', 'Remy Martin (Single Shot)'),
-(26, '2.00', NULL, '21:30:43', '2017-11-30', 'Cynlai', '	\nHenessy V.S.O.P (Single Shot)'),
-(27, '2.00', NULL, '21:45:14', '2017-11-30', 'Cynlai', 'Remy Martin (Single Shot)'),
-(28, '2.00', NULL, '21:45:14', '2017-11-30', 'Cynlai', '	\nFundador (Single Shot)'),
-(29, '0.00', NULL, '21:45:31', '2017-11-30', 'gg', 'Coleslaw Salad'),
-(30, '0.00', NULL, '21:45:31', '2017-11-30', 'gg', 'Vegetable Sticks'),
-(31, '0.00', NULL, '21:46:04', '2017-11-30', 'Cynlai', 'Hottotay Soup'),
-(32, '0.00', NULL, '21:46:04', '2017-11-30', 'Cynlai', 'Pancit Canton'),
-(33, '0.00', NULL, '21:46:04', '2017-11-30', 'Cynlai', 'Mushroom Soup'),
-(34, '0.00', NULL, '21:46:04', '2017-11-30', 'Cynlai', 'Chicken Mami'),
-(35, '2.00', NULL, '21:51:37', '2017-11-30', 'Cynlai', 'Vodka Snipper'),
-(36, '2.00', NULL, '21:51:37', '2017-11-30', 'Cynlai', 'B-51'),
-(37, '2.00', NULL, '21:51:37', '2017-11-30', 'Cynlai', 'Flaming Orgasm'),
-(38, '3.00', NULL, '21:55:34', '2017-11-30', 'Cynlai', 'Pork Barbeque'),
-(39, '3.00', NULL, '21:55:34', '2017-11-30', 'Cynlai', 'Chicken Barbeque'),
-(40, '6.00', NULL, '21:55:34', '2017-11-30', 'Cynlai', 'Inihaw na Baboy'),
-(41, '6.00', NULL, '22:43:05', '2017-11-30', 'ayie', '1/2 Sizzling Chicken'),
-(42, '6.00', NULL, '22:43:05', '2017-11-30', 'ayie', 'Sizzling Beef Tips'),
-(43, '6.00', NULL, '22:43:05', '2017-11-30', 'ayie', 'Sizzling Porkchop'),
-(44, '3.00', NULL, '22:43:05', '2017-11-30', 'ayie', 'Pork Barbeque'),
-(45, '6.00', NULL, '22:43:05', '2017-11-30', 'ayie', 'Inihaw na Baboy'),
-(46, '3.00', NULL, '22:43:05', '2017-11-30', 'ayie', 'Chicken Barbeque'),
-(47, '0.00', NULL, '22:45:06', '2017-11-30', 'gg', 'Shanghai Fried Rice'),
-(48, '0.00', NULL, '22:45:06', '2017-11-30', 'gg', 'Seafood Fried Rice'),
-(49, '0.00', NULL, '22:45:06', '2017-11-30', 'gg', 'Lechon Rice'),
-(50, '0.00', NULL, '22:47:15', '2017-11-30', 'Cynlai', 'Vegetable Sticks'),
-(51, '0.00', NULL, '22:47:15', '2017-11-30', 'Cynlai', 'Toss Green Salad'),
-(52, '6.00', NULL, '22:47:15', '2017-11-30', 'Cynlai', 'Cold Cuts'),
-(53, '6.00', NULL, '22:47:15', '2017-11-30', 'Cynlai', '1/2 Fried Chicken'),
-(54, '0.00', NULL, '22:50:50', '2017-11-30', 'Cynlai', 'Ham & Egg Sandwich'),
-(55, '0.00', NULL, '22:50:51', '2017-11-30', 'Cynlai', 'Clubhouse Sandwich'),
-(56, '0.00', NULL, '22:51:21', '2017-11-30', 'Cynlai', 'Garlic Rice'),
-(57, '0.00', NULL, '22:51:21', '2017-11-30', 'Cynlai', 'Shanghai Fried Rice'),
-(58, '0.00', NULL, '22:51:21', '2017-11-30', 'Cynlai', 'Seafood Fried Rice'),
-(59, '6.00', NULL, '22:52:23', '2017-11-30', 'Cynlai', 'Sizzling Pusit'),
-(60, '6.00', NULL, '22:52:23', '2017-11-30', 'Cynlai', 'Sizzling Gambas'),
-(61, '6.00', NULL, '22:52:23', '2017-11-30', 'Cynlai', 'Sizzling Fried Shrimp with Garlic Sauce'),
-(62, '0.00', NULL, '22:59:21', '2017-11-30', 'gg', 'Chicken Mami'),
-(63, '0.00', NULL, '22:59:21', '2017-11-30', 'gg', '	\nBeef Mami'),
-(64, '0.00', NULL, '23:01:30', '2017-11-30', 'Cynlai', 'Chicken Mami'),
-(65, '0.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', 'Coleslaw Salad'),
-(66, '19.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', 'Jack Daniel (750ml)'),
-(67, '19.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', 'Henessy V.S.O.P (750ml)'),
-(68, '2.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', 'Chivas Regal (Single Shot)'),
-(69, '2.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', 'Remy Martin (Single Shot)'),
-(70, '2.00', NULL, '23:03:14', '2017-11-30', 'Cynlai', '	\nHenessy V.S.O.P (Single Shot)'),
-(71, '0.00', NULL, '00:25:02', '2017-12-01', 'Jay', 'Shanghai Fried Rice'),
-(72, '0.00', NULL, '00:25:02', '2017-12-01', 'Jay', 'Lechon Rice'),
-(73, '6.00', NULL, '00:25:10', '2017-12-01', 'ayie', 'Sizzling Gambas'),
-(74, '0.00', NULL, '00:31:16', '2017-12-01', 'Cynlai', '	\nBeef Mami'),
-(75, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Seafood Fried Rice'),
-(76, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Porkchop Rice'),
-(77, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Garlic Rice'),
-(78, '0.50', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'San Miguel Light'),
-(79, '2.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Pitcher'),
-(80, '0.50', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'San Miguel Light (Apple/Lemon)'),
-(81, '0.50', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Red Horse'),
-(82, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Mango Juice'),
-(83, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Cranberry Cocktail'),
-(84, '0.00', NULL, '00:32:13', '2017-12-01', 'Cynlai', 'Iced Lemonde'),
-(85, '0.00', NULL, '00:59:02', '2017-12-01', 'ayie', 'Seafood Fried Rice'),
-(86, '0.00', NULL, '00:59:02', '2017-12-01', 'ayie', 'Lechon Rice'),
-(87, '0.00', NULL, '00:59:02', '2017-12-01', 'ayie', 'Plain Rice'),
-(88, '0.00', NULL, '00:59:11', '2017-12-01', 'Cynlai', 'Toss Green Salad'),
-(89, '0.00', NULL, '00:59:11', '2017-12-01', 'Cynlai', 'Vegetable Sticks'),
-(90, '2.00', NULL, '00:59:20', '2017-12-01', 'Jay', 'Plain Margarita'),
-(91, '2.00', NULL, '00:59:20', '2017-12-01', 'Jay', 'Blue Margarita'),
-(92, '2.00', NULL, '00:59:20', '2017-12-01', 'Jay', 'Tequila Sunrise'),
-(93, '2.00', NULL, '00:59:20', '2017-12-01', 'Jay', 'Dry Martini'),
-(94, '2.00', NULL, '00:59:20', '2017-12-01', 'Jay', 'Bull Jagger'),
-(95, '2.00', NULL, '00:59:36', '2017-12-01', 'v', 'Flaming Orgasm'),
-(96, '2.00', NULL, '00:59:36', '2017-12-01', 'v', 'Slippery Nipple'),
-(97, '6.00', NULL, '00:59:36', '2017-12-01', 'v', 'Shanghai Lumpia'),
-(98, '2.00', NULL, '01:14:20', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(99, '2.00', NULL, '01:20:26', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(100, '0.00', NULL, '01:25:29', '2017-12-01', 'Jay', 'Chicken Sandwich'),
-(101, '19.00', NULL, '01:25:29', '2017-12-01', 'Jay', '	\nBaileys (750ml)'),
-(102, '2.00', NULL, '01:26:55', '2017-12-01', 'ayie', 'Weng Weng'),
-(103, '2.00', NULL, '01:27:04', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(104, '2.00', NULL, '06:03:20', '2017-12-01', 'Jay', 'Weng Weng'),
-(105, '2.00', NULL, '06:04:38', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(106, '2.00', NULL, '06:04:54', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(107, '2.00', NULL, '06:05:04', '2017-12-01', 'ayie', 'Bull Jagger'),
-(108, '2.00', NULL, '06:10:15', '2017-12-01', 'Cynlai', 'Bull Jagger'),
-(109, '2.00', NULL, '06:10:22', '2017-12-01', 'ayie', 'Bull Jagger'),
-(110, '2.00', NULL, '06:10:29', '2017-12-01', 'Jay', 'Weng Weng'),
-(111, '2.00', NULL, '06:10:37', '2017-12-01', 'v', 'Weng Weng'),
-(112, '2.00', NULL, '06:12:13', '2017-12-01', 'v', 'Weng Weng'),
-(113, '2.00', NULL, '06:15:39', '2017-12-01', 'Jay', 'Weng Weng'),
-(114, '2.00', NULL, '06:19:15', '2017-12-01', 'Jay', 'Weng Weng'),
-(115, '2.00', NULL, '06:22:29', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(116, '2.00', NULL, '06:22:40', '2017-12-01', 'v', 'Weng Weng'),
-(117, '2.00', NULL, '06:34:22', '2017-12-01', 'Cynlai', 'Bull Jagger'),
-(118, '0.00', NULL, '06:37:54', '2017-12-01', 'Cynlai', 'Seafood Fried Rice'),
-(119, '2.00', NULL, '17:42:45', '2017-12-01', 'Cynlai', 'Bull Jagger'),
-(120, '2.00', NULL, '17:42:52', '2017-12-01', 'Cynlai', 'Weng Weng'),
-(121, '2.00', NULL, '17:42:58', '2017-12-01', 'ayie', 'Bull Jagger'),
-(122, '2.00', NULL, '17:43:04', '2017-12-01', 'v', 'Bull Jagger'),
-(123, '2.00', NULL, '17:43:11', '2017-12-01', 'ayie', 'Weng Weng'),
-(124, '0.00', NULL, '17:47:14', '2017-12-01', 'ayie', 'Toss Green Salad'),
-(125, '0.00', NULL, '17:47:14', '2017-12-01', 'ayie', 'Vegetable Sticks'),
-(126, '0.00', NULL, '17:50:55', '2017-12-01', 'Cynlai', 'Seafood Fried Rice'),
-(127, '0.00', NULL, '18:04:29', '2017-12-01', 'Cynlai', 'Mushroom Soup'),
-(128, '0.00', NULL, '18:04:29', '2017-12-01', 'Cynlai', 'Hottotay Soup'),
-(129, '0.00', NULL, '18:04:29', '2017-12-01', 'Cynlai', 'Pancit Canton'),
-(130, '19.00', NULL, '18:07:19', '2017-12-01', 'ayie', 'Absolute Blue (750ml)'),
-(131, '2.00', NULL, '18:07:19', '2017-12-01', 'ayie', '	\nAbsolute Citron (Single Shot)'),
-(132, '3.00', NULL, '18:12:54', '2017-12-01', 'Cynlai', 'Chicken Barbeque'),
-(133, '0.00', NULL, '18:13:27', '2017-12-01', 'ayie', 'Mushroom Soup'),
-(134, '0.00', NULL, '18:14:25', '2017-12-01', 'Cynlai', 'Lechon Rice'),
-(135, '6.00', NULL, '18:15:33', '2017-12-01', 'Cynlai', 'Beef Tapa'),
-(136, '1.00', NULL, '18:15:33', '2017-12-01', 'Cynlai', 'DSAASD'),
-(137, '0.00', NULL, '18:17:15', '2017-12-01', 'ayie', 'Lechon Rice'),
-(138, '0.00', NULL, '18:17:15', '2017-12-01', 'ayie', 'Seafood Fried Rice'),
-(139, '0.00', NULL, '18:17:15', '2017-12-01', 'ayie', 'Shanghai Fried Rice'),
-(140, '0.00', NULL, '18:17:15', '2017-12-01', 'ayie', 'Garlic Rice'),
-(141, '3.00', NULL, '18:17:23', '2017-12-01', 'Cynlai', 'Pork Barbeque'),
-(142, '3.00', NULL, '18:17:23', '2017-12-01', 'Cynlai', 'Chicken Barbeque'),
-(143, '0.00', NULL, '18:19:10', '2017-12-01', 'Cynlai', 'Chicken Sandwich'),
-(144, '0.00', NULL, '18:19:10', '2017-12-01', 'Cynlai', 'Ham & Chess Sandwich'),
-(145, '2.00', NULL, '18:19:18', '2017-12-01', 'ayie', 'Tangueray Gin (Single Shot)'),
-(146, '2.00', NULL, '18:19:18', '2017-12-01', 'ayie', 'Bacardi Gold (Single Shot)'),
-(147, '19.00', NULL, '18:19:18', '2017-12-01', 'ayie', 'Cuervo Gold (750ml)'),
-(148, '3.00', NULL, '18:20:34', '2017-12-01', 'ayie', 'Chicken Barbeque'),
-(149, '6.00', NULL, '18:20:34', '2017-12-01', 'ayie', 'Inihaw na Baboy'),
-(150, '0.00', NULL, '18:21:03', '2017-12-01', 'v', 'Chicken Sandwich'),
-(151, '0.00', NULL, '18:21:03', '2017-12-01', 'v', 'Clubhouse Sandwich'),
-(271, '0.00', NULL, '21:46:14', '2017-12-01', 'ayie', 'Ham & Egg Sandwich'),
-(272, '0.00', NULL, '21:46:14', '2017-12-01', 'ayie', 'Chicken Sandwich'),
-(273, '0.00', NULL, '21:46:20', '2017-12-01', 'Cynlai', 'Ham & Egg Sandwich'),
-(274, '0.00', NULL, '21:46:20', '2017-12-01', 'Cynlai', 'Clubhouse Sandwich'),
-(275, '0.00', NULL, '21:46:20', '2017-12-01', 'Cynlai', 'Chicken Sandwich'),
-(276, '0.00', NULL, '22:03:26', '2017-12-01', 'Cynlai', 'Coleslaw Salad'),
-(277, '0.00', NULL, '22:03:26', '2017-12-01', 'Cynlai', 'Vegetable Sticks'),
-(278, '6.00', NULL, '22:08:55', '2017-12-01', 'ayie', 'Sizzling Gambas'),
-(279, '0.00', NULL, '22:15:57', '2017-12-01', 'Cynlai', 'Shanghai Fried Rice'),
-(280, '0.00', NULL, '22:15:57', '2017-12-01', 'Cynlai', 'Seafood Fried Rice'),
-(281, '6.00', NULL, '22:16:12', '2017-12-01', 'Cynlai', 'Sizzling Tanguigui'),
-(282, '6.00', NULL, '22:16:12', '2017-12-01', 'Cynlai', 'Sizzling Beef Tips'),
-(283, '6.00', NULL, '22:16:12', '2017-12-01', 'Cynlai', 'Sizzling Pusit'),
-(284, '0.00', NULL, '22:16:20', '2017-12-01', 'Jay', 'Seafood Fried Rice'),
-(285, '0.00', NULL, '22:16:20', '2017-12-01', 'Jay', 'Lechon Rice'),
-(286, '0.00', NULL, '22:16:20', '2017-12-01', 'Jay', 'Porkchop Rice'),
-(287, '0.00', NULL, '22:16:25', '2017-12-01', 'Cynlai', 'Garlic Rice'),
-(288, '3.00', NULL, '22:19:15', '2017-12-01', 'ayie', 'Pork Barbeque'),
-(289, '2.00', NULL, '22:20:15', '2017-12-01', 'ayie', 'Cuervo Gold (Single Shot)'),
-(290, '0.00', NULL, '22:24:29', '2017-12-01', 'Cynlai', 'Ham & Egg Sandwich'),
-(291, '0.00', NULL, '22:24:29', '2017-12-01', 'Cynlai', 'Chicken Sandwich'),
-(292, '3.00', NULL, '22:24:29', '2017-12-01', 'Cynlai', 'Pork Barbeque'),
-(293, '6.00', NULL, '22:24:29', '2017-12-01', 'Cynlai', 'Inihaw na Baboy'),
-(294, '0.00', NULL, '22:24:29', '2017-12-01', 'Cynlai', 'Clubhouse Sandwich'),
-(295, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Fried Shrimp with Garlic Sauce'),
-(296, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Pusit'),
-(297, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Beef Tips'),
-(298, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Tanguigui'),
-(299, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Gambas'),
-(300, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', '1/2 Sizzling Chicken'),
-(301, '6.00', NULL, '22:28:41', '2017-12-01', 'ayie', 'Sizzling Porkchop'),
-(302, '0.00', NULL, '22:31:15', '2017-12-01', 'ayie', 'Lechon Rice'),
-(303, '0.00', NULL, '22:31:15', '2017-12-01', 'ayie', 'Shanghai Fried Rice'),
-(304, '0.00', NULL, '22:31:15', '2017-12-01', 'ayie', 'Garlic Rice'),
-(305, '0.00', NULL, '22:31:15', '2017-12-01', 'ayie', 'Porkchop Rice'),
-(306, '2.00', NULL, '22:32:15', '2017-12-01', 'Cynlai', '	\nHenessy V.S.O.P (Single Shot)'),
-(307, '2.00', NULL, '22:32:15', '2017-12-01', 'Cynlai', 'J & B (Single Shot)'),
-(308, '19.00', NULL, '22:32:15', '2017-12-01', 'Cynlai', 'Fundador (750ml)'),
-(309, '19.00', NULL, '22:32:15', '2017-12-01', 'Cynlai', 'Jack Daniel (750ml)'),
-(310, '6.00', NULL, '22:33:10', '2017-12-01', 'Cynlai', 'Inihaw na Baboy'),
-(311, '3.00', NULL, '22:33:10', '2017-12-01', 'Cynlai', 'Pork Barbeque'),
-(312, '3.00', NULL, '22:33:10', '2017-12-01', 'Cynlai', 'Chicken Barbeque');
+(1, '0.00', NULL, '22:07:50', '2018-01-07', 'ayie', 'Clubhouse Sandwich'),
+(2, '0.00', NULL, '22:07:50', '2018-01-07', 'ayie', 'Chicken Sandwich'),
+(3, '0.00', NULL, '22:11:45', '2018-01-07', 'ayie', 'Toss Green Salad'),
+(4, '0.00', NULL, '22:11:45', '2018-01-07', 'ayie', 'Vegetable Sticks'),
+(5, '2.00', NULL, '22:13:53', '2018-01-07', 'ayie', 'Slippery Nipple'),
+(6, '6.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Sizzling Tanguigui'),
+(7, '0.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Porkchop Rice'),
+(8, '0.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Garlic Rice'),
+(9, '6.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Crispy Pata'),
+(10, '6.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Kilawen Tanguigui'),
+(11, '3.00', NULL, '22:14:54', '2018-01-07', 'ayie', 'Hotdog with Onions'),
+(12, '3.00', NULL, '22:21:15', '2018-01-07', 'ayie', 'Chicken Barbeque'),
+(13, '3.00', NULL, '22:21:15', '2018-01-07', 'ayie', 'Pork Barbeque'),
+(14, '6.00', NULL, '22:21:15', '2018-01-07', 'ayie', 'Inihaw na Baboy'),
+(15, '6.00', NULL, '22:21:15', '2018-01-07', 'ayie', 'Inihaw na Pusit'),
+(16, '0.00', NULL, '22:22:59', '2018-01-07', 'ayie', 'Seafood Fried Rice'),
+(17, '0.00', NULL, '22:22:59', '2018-01-07', 'ayie', 'Porkchop Rice'),
+(18, '0.00', NULL, '22:22:59', '2018-01-07', 'ayie', 'Shanghai Fried Rice'),
+(19, '0.00', NULL, '22:22:59', '2018-01-07', 'ayie', 'Plain Rice'),
+(20, '0.00', NULL, '22:29:07', '2018-01-07', 'ayie', 'Chicken Sandwich'),
+(21, '0.00', NULL, '22:29:07', '2018-01-07', 'ayie', 'Ham & Egg Sandwich'),
+(22, '3.00', NULL, '22:29:12', '2018-01-07', 'ayie', 'Chicken Barbeque'),
+(23, '6.00', NULL, '22:29:12', '2018-01-07', 'ayie', 'Inihaw na Baboy'),
+(24, '0.00', NULL, '22:29:22', '2018-01-07', 'ayie', 'Ham & Egg Sandwich'),
+(25, '0.00', NULL, '22:29:22', '2018-01-07', 'ayie', 'Clubhouse Sandwich'),
+(26, '0.00', NULL, '22:29:22', '2018-01-07', 'ayie', 'Chicken Sandwich');
 
 -- --------------------------------------------------------
 
@@ -1360,43 +1316,16 @@ INSERT INTO `waitercomm_history` (`commid_history`, `itemcomm_history`, `itemtyp
 -- Table structure for table `waiter_commission`
 --
 
-CREATE TABLE `waiter_commission` (
-  `comm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `waiter_commission` (
+  `comm_id` int(11) NOT NULL AUTO_INCREMENT,
   `item_comm` decimal(65,2) DEFAULT NULL,
   `item_type` enum('drinks','dish') DEFAULT NULL,
   `time` time NOT NULL,
   `date` date NOT NULL,
   `waiter_name` varchar(255) NOT NULL,
-  `i_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `waiter_commission`
---
-
-INSERT INTO `waiter_commission` (`comm_id`, `item_comm`, `item_type`, `time`, `date`, `waiter_name`, `i_name`) VALUES
-(190, '0.00', NULL, '23:46:15', '2017-12-01', 'Cynlai', 'Chicken Sandwich'),
-(191, '0.00', NULL, '23:46:15', '2017-12-01', 'Cynlai', 'Ham & Egg Sandwich'),
-(192, '0.00', NULL, '23:46:15', '2017-12-01', 'Cynlai', 'Ham & Chess Sandwich'),
-(193, '0.00', NULL, '23:55:12', '2017-12-01', 'Cynlai', 'Seafood Fried Rice'),
-(194, '0.00', NULL, '23:55:12', '2017-12-01', 'Cynlai', 'Porkchop Rice'),
-(195, '0.00', NULL, '23:55:12', '2017-12-01', 'Cynlai', 'Lechon Rice'),
-(196, '2.00', NULL, '23:58:22', '2017-12-01', 'ayie', 'Smirnoff (Single Shot)'),
-(197, '0.00', NULL, '00:07:53', '2017-12-02', 'ayie', 'Chicken Sandwich'),
-(198, '0.00', NULL, '00:07:53', '2017-12-02', 'ayie', 'Ham & Egg Sandwich'),
-(199, '0.00', NULL, '00:08:55', '2017-12-02', 'ayie', 'Chicken Sandwich'),
-(200, '0.00', NULL, '00:08:55', '2017-12-02', 'ayie', 'Ham & Chess Sandwich'),
-(201, '3.00', NULL, '00:11:57', '2017-12-02', 'ayie', 'Pork Barbeque'),
-(202, '6.00', NULL, '15:21:05', '2017-12-02', 'Cynlai', 'Sizzling Gambas'),
-(203, '6.00', NULL, '15:21:05', '2017-12-02', 'Cynlai', 'Sizzling Fried Shrimp with Garlic Sauce'),
-(204, '6.00', NULL, '15:21:05', '2017-12-02', 'Cynlai', 'Sizzling Pusit'),
-(205, '0.00', NULL, '15:21:17', '2017-12-02', 'Cynlai', 'Shanghai Fried Rice'),
-(206, '0.00', NULL, '15:21:17', '2017-12-02', 'Cynlai', 'Seafood Fried Rice'),
-(207, '0.00', NULL, '18:33:39', '2017-12-02', 'peps', 'Seafood Fried Rice'),
-(208, '0.00', NULL, '18:33:39', '2017-12-02', 'peps', 'Lechon Rice'),
-(209, '0.00', NULL, '18:33:39', '2017-12-02', 'peps', 'Porkchop Rice'),
-(210, '6.00', NULL, '19:57:15', '2017-12-02', 'Cynlai', 'Chicharon Bulaklak'),
-(211, '2.00', NULL, '20:16:49', '2017-12-02', 'peps', 'Margarita');
+  `i_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`comm_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
 
 -- --------------------------------------------------------
 
@@ -1404,254 +1333,27 @@ INSERT INTO `waiter_commission` (`comm_id`, `item_comm`, `item_type`, `time`, `d
 -- Table structure for table `waiter_db`
 --
 
-CREATE TABLE `waiter_db` (
-  `id` int(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `waiter_db` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `position` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `position` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `waiter_db`
 --
 
 INSERT INTO `waiter_db` (`id`, `firstname`, `lastname`, `position`) VALUES
-(11, 'gg', 'hadid', 'Waiter'),
-(12, 'gg', 'ka', 'Waiter'),
-(5, 'ayie', 'hidalgo', 'Waiter'),
-(6, 'v', 'v vv', 'Waiter'),
-(7, 'Cynlai', 'Osorio', 'Waiter'),
-(8, 'Jay', 'd', 'Waiter'),
-(9, 'sad', 'bb', 'Waiter'),
-(10, 'peps', 'pit', 'Waiter'),
-(13, 'hello', 'world', 'Waiter'),
-(14, 'pet', 'malu', 'Waiter'),
-(15, 'ry', 'yr', 'Waiter'),
-(16, 'ayie', 'bubits', 'Waiter'),
-(17, 'ayie', 'hidalgo', 'Waiter'),
-(18, 'ayie', 'hidalgo', 'Waiter');
+(7, 'Princes', 'Criste', 'waiter'),
+(6, 'Leonard', 'Tagarino', 'waiter'),
+(5, 'Rrhyana', 'Bacwaden', 'waiter'),
+(4, 'Cynlai ', 'Osorio', 'waiter'),
+(3, 'Steven', 'Bitmead', 'waiter'),
+(2, 'Neil ', 'Gallego', 'waiter'),
+(1, 'Jay', 'De Guzman', 'waiter');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin_password`
---
-ALTER TABLE `admin_password`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `assigned_waiters`
---
-ALTER TABLE `assigned_waiters`
-  ADD PRIMARY KEY (`d_id`);
-
---
--- Indexes for table `billing`
---
-ALTER TABLE `billing`
-  ADD PRIMARY KEY (`bill_id`);
-
---
--- Indexes for table `charge_db`
---
-ALTER TABLE `charge_db`
-  ADD PRIMARY KEY (`charged_id`);
-
---
--- Indexes for table `charge_history`
---
-ALTER TABLE `charge_history`
-  ADD PRIMARY KEY (`chargedid_history`);
-
---
--- Indexes for table `config_time`
---
-ALTER TABLE `config_time`
-  ADD PRIMARY KEY (`time_id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-  ADD PRIMARY KEY (`emp_id`);
-
---
--- Indexes for table `item_histroy`
---
-ALTER TABLE `item_histroy`
-  ADD PRIMARY KEY (`itemH_id`);
-
---
--- Indexes for table `menu_db`
---
-ALTER TABLE `menu_db`
-  ADD PRIMARY KEY (`menuitem_id`),
-  ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexes for table `order_db`
---
-ALTER TABLE `order_db`
-  ADD PRIMARY KEY (`order_id`);
-
---
--- Indexes for table `paid_db`
---
-ALTER TABLE `paid_db`
-  ADD PRIMARY KEY (`paid_id`),
-  ADD KEY `paid_id` (`paid_id`);
-
---
--- Indexes for table `sales_db`
---
-ALTER TABLE `sales_db`
-  ADD PRIMARY KEY (`sales_id`);
-
---
--- Indexes for table `served_db`
---
-ALTER TABLE `served_db`
-  ADD PRIMARY KEY (`served_id`);
-
---
--- Indexes for table `table_db`
---
-ALTER TABLE `table_db`
-  ADD PRIMARY KEY (`table_id`);
-
---
--- Indexes for table `table_orders`
---
-ALTER TABLE `table_orders`
-  ADD PRIMARY KEY (`table_orders_id`);
-
---
--- Indexes for table `transaction`
---
-ALTER TABLE `transaction`
-  ADD PRIMARY KEY (`transac_id`);
-
---
--- Indexes for table `transaction_history`
---
-ALTER TABLE `transaction_history`
-  ADD PRIMARY KEY (`transacH_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `waitercomm_history`
---
-ALTER TABLE `waitercomm_history`
-  ADD PRIMARY KEY (`commid_history`);
-
---
--- Indexes for table `waiter_commission`
---
-ALTER TABLE `waiter_commission`
-  ADD PRIMARY KEY (`comm_id`);
-
---
--- Indexes for table `waiter_db`
---
-ALTER TABLE `waiter_db`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admin_password`
---
-ALTER TABLE `admin_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `assigned_waiters`
---
-ALTER TABLE `assigned_waiters`
-  MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `config_time`
---
-ALTER TABLE `config_time`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `employee`
---
-ALTER TABLE `employee`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `item_histroy`
---
-ALTER TABLE `item_histroy`
-  MODIFY `itemH_id` int(65) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
---
--- AUTO_INCREMENT for table `menu_db`
---
-ALTER TABLE `menu_db`
-  MODIFY `menuitem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
---
--- AUTO_INCREMENT for table `order_db`
---
-ALTER TABLE `order_db`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `paid_db`
---
-ALTER TABLE `paid_db`
-  MODIFY `paid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=205;
---
--- AUTO_INCREMENT for table `sales_db`
---
-ALTER TABLE `sales_db`
-  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `table_db`
---
-ALTER TABLE `table_db`
-  MODIFY `table_id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
---
--- AUTO_INCREMENT for table `table_orders`
---
-ALTER TABLE `table_orders`
-  MODIFY `table_orders_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
---
--- AUTO_INCREMENT for table `transaction`
---
-ALTER TABLE `transaction`
-  MODIFY `transac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `transaction_history`
---
-ALTER TABLE `transaction_history`
-  MODIFY `transacH_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
---
--- AUTO_INCREMENT for table `waitercomm_history`
---
-ALTER TABLE `waitercomm_history`
-  MODIFY `commid_history` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=313;
---
--- AUTO_INCREMENT for table `waiter_commission`
---
-ALTER TABLE `waiter_commission`
-  MODIFY `comm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
---
--- AUTO_INCREMENT for table `waiter_db`
---
-ALTER TABLE `waiter_db`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

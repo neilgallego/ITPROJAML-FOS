@@ -39,7 +39,7 @@ if(isset($_GET['cat'])){
 			<?php echo $product_array[$key]["name"]; ?>
 			</strong></div>
 			<div><strong>
-			<?php echo $product_array[$key]["item_happyprice"]; ?>.00
+			<?php echo $product_array[$key]["item_happyprice"]; ?>
 			</strong></div>
 
 		

@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
 $username = $_POST['username'];
 
 $password = $_POST['password'];
-$password = md5($password);
+//$password = md5($password);
 
 $connection = mysqli_connect("localhost", "root", "");
 
@@ -43,7 +43,7 @@ if(! $result){
                   if($position == 'Checker'){
                   
                     $_SESSION['fname'] = $firstname;
-                   header("Location: checker/main.php");
+                   header("Location: checker/assign_waiters_1.php");
                   }elseif($position == 'Cashier'){
                     $_SESSION['username'] = $firstname;
                       //echo "cashier";

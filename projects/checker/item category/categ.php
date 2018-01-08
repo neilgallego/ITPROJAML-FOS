@@ -17,7 +17,7 @@ body {
 <div width="100%" style="left:5px; position:fixed; ">
 
               
-              <a style="width:10%; height: 45px;  float:left; " href="beverages.php?cat=Cocktails" target="iframe_g"  class="nlist-group-item list-group-item-default" data-parent="#SubMenu2" >COCKTAILS</a>
+              <a style="width:10%; height: 45px;  float:left; " href="beverages.php?cat=COCKTAILS" target="iframe_g"  class="list-group-item list-group-item-default" data-parent="#SubMenu2" >COCKTAILS</a>
               <a style="width:10%; height: 45px;  float:left; " href="beverages.php?cat=Pitcher+Cocktails" target="iframe_g"  class="list-group-item list-group-item-default" data-parent="#SubMenu2" >PITCHERS</a>
               <a style="width:10%; height: 45px;  float:left;" href="beverages.php?cat=Shooters" target="iframe_g"  class="list-group-item list-group-item-default" data-parent="#SubMenu2" >SHOOTERS</a>
               <a style="width:12%; height: 45px; float:left;" href="beverages.php?cat=Tequila%2FGin%2FRum%2FVodka" target="iframe_g"  class="list-group-item list-group-item-default" data-parent="#SubMenu2" >TG/GN/RN/VK</a>
